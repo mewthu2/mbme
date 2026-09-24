@@ -1,0 +1,309 @@
+{%- liquid
+  assign visible = true
+  if section.settings.home_only and request.page_type != 'index'
+    assign visible = false
+  endif
+-%}
+
+{%- if visible and section.blocks.size > 0 -%}
+  <nav
+    class="collection-strip full-width collection-strip--{{ section.settings.style }} collection-strip--{{ section.settings.size }} color-scheme--{{ section.settings.color_scheme }}"
+    aria-label="{% if section.settings.heading != blank %}{{ section.settings.heading | escape }}{% else %}{{ 'header.collections' | t }}{% endif %}"
+  >
+    <scroll-slider class="page-width collection-strip__inner">
+      <button type="button" class="collection-strip__arrow collection-strip__arrow--prev" data-slider-prev aria-label="{{ 'general.previous' | t }}">{% render 'icon', name: 'chevron-left' %}</button>
+      <ul class="collection-strip__list" role="list" data-slider-track>
+        {%- for block in section.blocks -%}
+          {%- liquid
+            assign item_collection = block.settings.collection
+            assign item_label = block.settings.label
+            assign item_url = block.settings.link
+            assign item_image = block.settings.image
+            if item_collection != blank
+              if item_label == blank
+                assign item_label = item_collection.title
+              endif
+              if item_url == blank
+                assign item_url = item_collection.url
+              endif
+              if item_image == blank
+                assign item_image = item_collection.featured_image
+              endif
+            endif
+            if item_label == blank
+              assign item_label = 'general.collection_placeholder' | t
+            endif
+            assign is_current = false
+            if item_collection != blank and collection.handle == item_collection.handle
+              assign is_current = true
+            endif
+          -%}
+          <li {{ block.shopify_attributes }}>
+            <a href="{{ item_url | default: '#' }}" class="collection-strip__item{% if is_current %} is-current{% endif %}" {% if is_current %}aria-current="page"{% endif %}>
+              {%- if section.settings.style != 'text' -%}
+                <span class="collection-strip__media">
+                  {%- if item_image -%}
+                    {{ item_image | image_url: width: 240 | image_tag: loading: 'lazy', widths: '120, 180, 240', sizes: '96px', alt: '' }}
+                  {%- else -%}
+                    {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                  {%- endif -%}
+                </span>
+              {%- endif -%}
+              <span class="collection-strip__label">{{ item_label }}</span>
+            </a>
+          </li>
+        {%- endfor -%}
+      </ul>
+      <button type="button" class="collection-strip__arrow collection-strip__arrow--next" data-slider-next aria-label="{{ 'general.next' | t }}">{% render 'icon', name: 'chevron-right' %}</button>
+    </scroll-slider>
+  </nav>
+{%- endif -%}
+
+{% stylesheet %}
+  .collection-strip {
+    display: block;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .collection-strip__inner {
+    position: relative;
+    display: block;
+  }
+
+  .collection-strip__list {
+    display: flex;
+    gap: var(--strip-gap, 1.75rem);
+    width: max-content;
+    max-width: 100%;
+    margin-inline: auto;
+    padding: var(--strip-padding, 1rem) 0;
+    list-style: none;
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+    scrollbar-width: none;
+  }
+
+  .collection-strip__list::-webkit-scrollbar {
+    display: none;
+  }
+
+  .collection-strip__list > li {
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+  }
+
+  .collection-strip__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    width: calc(var(--strip-thumb) + 1rem);
+    text-decoration: none;
+    text-align: center;
+  }
+
+  .collection-strip__media {
+    position: relative;
+    display: block;
+    width: var(--strip-thumb);
+    height: var(--strip-thumb);
+    overflow: hidden;
+    background: var(--color-card-image);
+    transition: box-shadow 0.25s ease;
+  }
+
+  .collection-strip__media img,
+  .collection-strip__media svg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+  }
+
+  .collection-strip__item:hover .collection-strip__media img {
+    transform: scale(1.08);
+  }
+
+  .collection-strip__item:hover .collection-strip__media,
+  .collection-strip__item.is-current .collection-strip__media {
+    box-shadow: 0 0 0 1px var(--color-background), 0 0 0 2px var(--color-accent);
+  }
+
+  .collection-strip--circle .collection-strip__media {
+    border-radius: 50%;
+  }
+
+  .collection-strip--rounded .collection-strip__media {
+    border-radius: 0.75rem;
+  }
+
+  .collection-strip__label {
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    line-height: 1.35;
+    text-transform: uppercase;
+  }
+
+  .collection-strip__item.is-current .collection-strip__label,
+  .collection-strip__item:hover .collection-strip__label {
+    color: var(--color-accent);
+  }
+
+  .collection-strip--small {
+    --strip-thumb: 3.5rem;
+    --strip-gap: 1.25rem;
+    --strip-padding: 0.75rem;
+  }
+
+  .collection-strip--medium {
+    --strip-thumb: 4.75rem;
+    --strip-gap: 1.75rem;
+    --strip-padding: 1.125rem;
+  }
+
+  .collection-strip--text {
+    --strip-gap: 0.5rem;
+    --strip-padding: 0.75rem;
+  }
+
+  .collection-strip--text .collection-strip__item {
+    width: auto;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--color-border);
+    border-radius: 2rem;
+    transition: border-color 0.2s ease;
+  }
+
+  .collection-strip--text .collection-strip__item:hover,
+  .collection-strip--text .collection-strip__item.is-current {
+    border-color: var(--color-foreground);
+  }
+
+  .collection-strip--text .collection-strip__label {
+    white-space: nowrap;
+  }
+
+  .collection-strip__arrow {
+    position: absolute;
+    top: 50%;
+    z-index: 1;
+    display: grid;
+    place-items: center;
+    width: 2rem;
+    height: 2rem;
+    padding: 0;
+    border: 1px solid var(--color-border);
+    border-radius: 50%;
+    background: var(--color-background);
+    color: var(--color-foreground);
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+
+  .collection-strip__arrow .icon {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .collection-strip__arrow--prev {
+    left: 0;
+  }
+
+  .collection-strip__arrow--next {
+    right: 0;
+  }
+
+  .collection-strip__arrow:disabled {
+    display: none;
+  }
+
+  @media (max-width: 749px) {
+    .collection-strip__list {
+      width: auto;
+      margin-inline: calc(var(--page-margin) * -1);
+      padding-inline: var(--page-margin);
+      scroll-padding-inline: var(--page-margin);
+    }
+
+    .collection-strip__arrow {
+      display: none;
+    }
+
+    .collection-strip--medium {
+      --strip-thumb: 4rem;
+      --strip-gap: 1.25rem;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Faixa de coleções",
+  "class": "section-collection-strip",
+  "max_blocks": 20,
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Nome para acessibilidade", "default": "Coleções" },
+    {
+      "type": "select",
+      "id": "style",
+      "label": "Estilo",
+      "options": [
+        { "value": "circle", "label": "Imagem redonda" },
+        { "value": "rounded", "label": "Imagem quadrada arredondada" },
+        { "value": "square", "label": "Imagem quadrada" },
+        { "value": "text", "label": "Só texto (pílulas)" }
+      ],
+      "default": "circle"
+    },
+    {
+      "type": "select",
+      "id": "size",
+      "label": "Tamanho",
+      "options": [
+        { "value": "small", "label": "Pequeno" },
+        { "value": "medium", "label": "Médio" }
+      ],
+      "default": "small"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Fundo",
+      "options": [
+        { "value": "default", "label": "Padrão" },
+        { "value": "surface", "label": "Claro" }
+      ],
+      "default": "default"
+    },
+    { "type": "checkbox", "id": "home_only", "label": "Mostrar só na página inicial", "default": false }
+  ],
+  "blocks": [
+    {
+      "type": "collection",
+      "name": "Coleção",
+      "settings": [
+        { "type": "collection", "id": "collection", "label": "Coleção" },
+        { "type": "text", "id": "label", "label": "Nome personalizado", "info": "Opcional. Por padrão usa o nome da coleção." },
+        { "type": "image_picker", "id": "image", "label": "Imagem personalizada", "info": "Opcional. Por padrão usa a imagem da coleção." },
+        { "type": "url", "id": "link", "label": "Link personalizado", "info": "Opcional. Use para apontar para outra página." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Faixa de coleções",
+      "blocks": [
+        { "type": "collection", "settings": { "label": "Anéis de noivado" } },
+        { "type": "collection", "settings": { "label": "Alianças" } },
+        { "type": "collection", "settings": { "label": "Eternidade" } },
+        { "type": "collection", "settings": { "label": "Brincos" } },
+        { "type": "collection", "settings": { "label": "Colares" } },
+        { "type": "collection", "settings": { "label": "Pulseiras" } },
+        { "type": "collection", "settings": { "label": "Diamantes" } },
+        { "type": "collection", "settings": { "label": "Pronta entrega" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

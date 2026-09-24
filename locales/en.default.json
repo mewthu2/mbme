@@ -16,7 +16,9 @@
     "pagination": "Pagination",
     "product_placeholder": "Product name",
     "rating": "{{ rating }} out of 5 stars",
-    "whatsapp": "Chat with us on WhatsApp"
+    "whatsapp": "Chat with us on WhatsApp",
+    "social_placeholder": "Add your social links in Theme settings > Social media.",
+    "collection_placeholder": "Collection"
   },
   "header": {
     "account": "Account",
@@ -24,7 +26,8 @@
     "main_navigation": "Main navigation",
     "menu": "Menu",
     "search": "Search",
-    "view_all": "View all {{ title }}"
+    "view_all": "View all {{ title }}",
+    "collections": "Collections"
   },
   "localization": {
     "country": "Country/region",
@@ -37,7 +40,11 @@
     "success": "Thanks for subscribing!"
   },
   "footer": {
-    "rights": "All rights reserved."
+    "rights": "All rights reserved.",
+    "whatsapp": "Chat on WhatsApp",
+    "payment_methods": "Payment methods",
+    "security": "Secure shopping",
+    "follow_us": "Follow us"
   },
   "blog": {
     "all": "All",

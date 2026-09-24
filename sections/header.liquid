@@ -3,8 +3,8 @@
   assign promos = section.blocks | where: 'type', 'mega_promo'
 -%}
 
-<header-component class="site-header full-width{% if section.settings.sticky %} site-header--sticky{% endif %}">
-  <div class="site-header__top page-width">
+<header-component class="site-header full-width site-header--logo-{{ section.settings.logo_position }} site-header--mobile-logo-{{ section.settings.mobile_logo_position }}{% if section.settings.sticky %} site-header--sticky{% endif %}">
+  <div class="site-header__bar page-width">
     <div class="site-header__start">
       <button type="button" class="icon-button site-header__menu-toggle" aria-controls="MenuDrawer" aria-label="{{ 'header.menu' | t }}" data-menu-open>
         {% render 'icon', name: 'menu' %}
@@ -53,11 +53,10 @@
         <span class="site-header__cart-count" data-cart-count {% if cart.item_count == 0 %}hidden{% endif %}>{{ cart.item_count }}</span>
       </a>
     </div>
-  </div>
 
   {%- if menu.links.size > 0 -%}
     <nav class="site-header__nav" aria-label="{{ 'header.main_navigation' | t }}">
-      <ul class="site-nav page-width" role="list">
+      <ul class="site-nav" role="list">
         {%- for link in menu.links -%}
           {%- assign link_handle = link.title | handleize -%}
           {%- liquid
@@ -129,6 +128,7 @@
       </ul>
     </nav>
   {%- endif -%}
+  </div>
 
   <dialog id="MenuDrawer" class="drawer drawer--left menu-drawer" aria-label="{{ 'header.menu' | t }}" scroll-lock>
     <div class="drawer__header">
@@ -239,12 +239,83 @@
     box-shadow: 0 6px 24px rgb(0 0 0 / 0.06);
   }
 
-  .site-header__top {
+  .site-header__bar {
     display: grid;
-    grid-template-columns: 1fr auto 1fr;
     align-items: center;
-    gap: 1rem;
+    column-gap: 1.5rem;
     min-height: 4.5rem;
+  }
+
+  .site-header__start {
+    grid-area: start;
+  }
+
+  .site-header__logo {
+    grid-area: logo;
+  }
+
+  .site-header__nav {
+    grid-area: nav;
+    align-self: stretch;
+  }
+
+  .site-header__end {
+    grid-area: end;
+  }
+
+  .site-header--logo-center .site-header__bar {
+    grid-template-columns: 1fr auto 1fr;
+    grid-template-areas:
+      'start logo end'
+      'nav nav nav';
+  }
+
+  .site-header--logo-center .site-header__logo {
+    padding-block: 1rem;
+  }
+
+  .site-header--logo-left .site-header__bar {
+    grid-template-columns: auto 1fr auto auto;
+    grid-template-areas: 'logo nav start end';
+  }
+
+  .site-header--logo-left .site-nav {
+    height: 100%;
+  }
+
+  .site-header--logo-left .site-nav__item,
+  .site-header--logo-left .site-nav__link {
+    display: flex;
+    align-items: center;
+    height: 100%;
+  }
+
+  .site-header--logo-left .site-nav__link::after {
+    bottom: 1.25rem;
+  }
+
+  .site-header--logo-left-stacked .site-header__bar {
+    grid-template-columns: auto 1fr auto;
+    grid-template-areas:
+      'logo start end'
+      'nav nav nav';
+  }
+
+  .site-header--logo-left-stacked .site-header__logo {
+    padding-block: 1rem;
+  }
+
+  .site-header--logo-left-stacked .site-header__start {
+    justify-content: flex-end;
+  }
+
+  .site-header--logo-left-stacked .site-nav {
+    justify-content: flex-start;
+  }
+
+  .site-header--logo-left .site-header__logo,
+  .site-header--logo-left-stacked .site-header__logo {
+    text-align: start;
   }
 
   .site-header__start,
@@ -328,7 +399,12 @@
     justify-content: center;
     flex-wrap: wrap;
     gap: 0 2rem;
+    padding: 0;
     list-style: none;
+  }
+
+  .site-header--logo-left .site-nav {
+    gap: 0 1.5rem;
   }
 
   .site-nav__link {
@@ -597,8 +673,31 @@
       display: none;
     }
 
-    .site-header__top {
+    .site-header__bar,
+    .site-header--logo-center .site-header__bar,
+    .site-header--logo-left .site-header__bar,
+    .site-header--logo-left-stacked .site-header__bar {
+      grid-template-columns: 1fr auto 1fr;
+      grid-template-areas: 'start logo end';
       min-height: 3.75rem;
+      column-gap: 0.5rem;
+    }
+
+    .site-header--mobile-logo-left .site-header__bar,
+    .site-header--mobile-logo-left.site-header--logo-center .site-header__bar,
+    .site-header--mobile-logo-left.site-header--logo-left .site-header__bar,
+    .site-header--mobile-logo-left.site-header--logo-left-stacked .site-header__bar {
+      grid-template-columns: auto 1fr auto;
+    }
+
+    .site-header--mobile-logo-left .site-header__logo {
+      text-align: start;
+    }
+
+    .site-header__logo,
+    .site-header--logo-center .site-header__logo,
+    .site-header--logo-left-stacked .site-header__logo {
+      padding-block: 0.5rem;
     }
 
     .site-header__logo-text {
@@ -703,6 +802,27 @@
   "settings": [
     { "type": "link_list", "id": "menu", "label": "Menu principal", "default": "main-menu", "info": "Até 3 níveis. O 2º nível vira coluna do mega menu e o 3º nível, a lista de links." },
     { "type": "link_list", "id": "customer_account_menu", "label": "Menu da conta do cliente", "default": "customer-account-main-menu" },
+    {
+      "type": "select",
+      "id": "logo_position",
+      "label": "Posição do logo (desktop)",
+      "options": [
+        { "value": "center", "label": "Centro, menu abaixo" },
+        { "value": "left", "label": "Esquerda, menu na mesma linha" },
+        { "value": "left-stacked", "label": "Esquerda, menu abaixo" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "mobile_logo_position",
+      "label": "Posição do logo (celular)",
+      "options": [
+        { "value": "center", "label": "Centro" },
+        { "value": "left", "label": "Esquerda" }
+      ],
+      "default": "center"
+    },
     { "type": "checkbox", "id": "sticky", "label": "Cabeçalho fixo ao rolar", "default": true },
     { "type": "checkbox", "id": "show_search", "label": "Mostrar busca", "default": true },
     { "type": "checkbox", "id": "show_localization", "label": "Mostrar seletor de país/moeda", "default": true },

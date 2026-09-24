@@ -18,7 +18,7 @@
           "type": "brand",
           "settings": {
             "text": "<p>Joias finas e esmeraldas certificadas, criados com excelência artesanal.</p>",
-            "show_social": true
+            "show_social": false
           }
         },
         "menu_2": {
@@ -35,24 +35,20 @@
             "menu": "main-menu"
           }
         },
-        "newsletter_4": {
-          "type": "newsletter",
-          "settings": {
-            "heading": "Vamos manter contato",
-            "text": "<p>Novidades e ofertas exclusivas no seu e-mail.</p>"
-          }
+        "contact_4": {
+          "type": "contact",
+          "settings": {}
         }
       },
       "block_order": [
         "brand_1",
         "menu_2",
         "menu_3",
-        "newsletter_4"
+        "contact_4"
       ],
       "settings": {
         "color_scheme": "dark",
         "legal_text": "<p>Razão social · CNPJ 00.000.000/0001-00 · Endereço completo</p>",
-        "legal_menu": "",
         "show_localization": true,
         "show_payment_icons": true
       }

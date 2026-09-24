@@ -100,11 +100,12 @@
   {
     "name": "Redes sociais",
     "settings": [
-      { "type": "text", "id": "social_instagram_link", "label": "Instagram", "info": "https://instagram.com/sualoja" },
-      { "type": "text", "id": "social_facebook_link", "label": "Facebook" },
-      { "type": "text", "id": "social_pinterest_link", "label": "Pinterest" },
-      { "type": "text", "id": "social_tiktok_link", "label": "TikTok" },
-      { "type": "text", "id": "social_youtube_link", "label": "YouTube" },
+      { "type": "paragraph", "content": "Substitua pelos links dos perfis da sua loja. Deixe em branco para ocultar a rede." },
+      { "type": "text", "id": "social_instagram_link", "label": "Instagram", "default": "https://www.instagram.com/" },
+      { "type": "text", "id": "social_facebook_link", "label": "Facebook", "default": "https://www.facebook.com/" },
+      { "type": "text", "id": "social_pinterest_link", "label": "Pinterest", "default": "https://www.pinterest.com/" },
+      { "type": "text", "id": "social_tiktok_link", "label": "TikTok", "default": "https://www.tiktok.com/" },
+      { "type": "text", "id": "social_youtube_link", "label": "YouTube", "default": "https://www.youtube.com/" },
       { "type": "text", "id": "social_twitter_link", "label": "X (Twitter)" },
       { "type": "text", "id": "social_linkedin_link", "label": "LinkedIn" }
     ]

@@ -16,7 +16,9 @@
     "pagination": "Paginação",
     "product_placeholder": "Nome do produto",
     "rating": "{{ rating }} de 5 estrelas",
-    "whatsapp": "Fale conosco pelo WhatsApp"
+    "whatsapp": "Fale conosco pelo WhatsApp",
+    "social_placeholder": "Adicione os links das redes em Configurações do tema > Redes sociais.",
+    "collection_placeholder": "Coleção"
   },
   "header": {
     "account": "Minha conta",
@@ -24,7 +26,8 @@
     "main_navigation": "Navegação principal",
     "menu": "Menu",
     "search": "Buscar",
-    "view_all": "Ver tudo em {{ title }}"
+    "view_all": "Ver tudo em {{ title }}",
+    "collections": "Coleções"
   },
   "localization": {
     "country": "País/região",
@@ -37,7 +40,11 @@
     "success": "Obrigado por se inscrever!"
   },
   "footer": {
-    "rights": "Todos os direitos reservados."
+    "rights": "Todos os direitos reservados.",
+    "whatsapp": "Fale pelo WhatsApp",
+    "payment_methods": "Formas de pagamento",
+    "security": "Compra segura",
+    "follow_us": "Siga-nos"
   },
   "blog": {
     "all": "Todos",

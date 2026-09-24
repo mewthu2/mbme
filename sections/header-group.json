@@ -61,10 +61,75 @@
         "appointment_label": "Esmeraldas certificadas",
         "appointment_link": ""
       }
+    },
+    "collections": {
+      "type": "collection-strip",
+      "settings": {},
+      "blocks": {
+        "collection_1": {
+          "type": "collection",
+          "settings": {
+            "label": "Anéis de noivado"
+          }
+        },
+        "collection_2": {
+          "type": "collection",
+          "settings": {
+            "label": "Alianças"
+          }
+        },
+        "collection_3": {
+          "type": "collection",
+          "settings": {
+            "label": "Eternidade"
+          }
+        },
+        "collection_4": {
+          "type": "collection",
+          "settings": {
+            "label": "Brincos"
+          }
+        },
+        "collection_5": {
+          "type": "collection",
+          "settings": {
+            "label": "Colares"
+          }
+        },
+        "collection_6": {
+          "type": "collection",
+          "settings": {
+            "label": "Pulseiras"
+          }
+        },
+        "collection_7": {
+          "type": "collection",
+          "settings": {
+            "label": "Diamantes"
+          }
+        },
+        "collection_8": {
+          "type": "collection",
+          "settings": {
+            "label": "Pronta entrega"
+          }
+        }
+      },
+      "block_order": [
+        "collection_1",
+        "collection_2",
+        "collection_3",
+        "collection_4",
+        "collection_5",
+        "collection_6",
+        "collection_7",
+        "collection_8"
+      ]
     }
   },
   "order": [
     "announcement",
-    "header"
+    "header",
+    "collections"
   ]
 }
