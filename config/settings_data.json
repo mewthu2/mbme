@@ -8,5 +8,14 @@
  * ------------------------------------------------------------
  */
 {
-  "current": {}
+  "current": {
+    "logo_inverse": "shopify://shop_images/mbm.png",
+    "sections": {
+      "cart-drawer": {
+        "type": "cart-drawer",
+        "settings": {}
+      }
+    },
+    "content_for_index": []
+  }
 }

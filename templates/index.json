@@ -1,19 +1,40 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero": {
       "type": "hero",
-      "settings": {}
+      "settings": {
+        "height": "large",
+        "content_position": "middle-left",
+        "overlay_opacity": 35,
+        "text_color": "#ffffff",
+        "eyebrow": "Nova coleção",
+        "heading": "Capture a luz",
+        "text": "<p>Joias criadas com excelência para o seu momento. Agora com até 30% de desconto.</p>",
+        "button_label_1": "Anéis de noivado",
+        "button_link_1": "",
+        "button_label_2": "Joias com diamantes",
+        "button_link_2": ""
+      }
     },
     "features": {
       "type": "features",
-      "settings": {},
       "blocks": {
         "feature_1": {
           "type": "feature",
           "settings": {
             "icon": "hand",
             "title": "Design artesanal",
-            "text": "<p>Cada peça é criada por nossos ourives com precisão e cuidado.</p>"
+            "text": "<p>Cada peça é criada por nossos ourives com precisão e cuidado.</p>",
+            "link": ""
           }
         },
         "feature_2": {
@@ -21,7 +42,8 @@
           "settings": {
             "icon": "chat",
             "title": "Consultoria especializada",
-            "text": "<p>Especialistas prontos para ajudar você a escolher a peça perfeita.</p>"
+            "text": "<p>Especialistas prontos para ajudar você a escolher a peça perfeita.</p>",
+            "link": ""
           }
         },
         "feature_3": {
@@ -29,7 +51,8 @@
           "settings": {
             "icon": "return",
             "title": "Trocas e ajuste de aro",
-            "text": "<p>Trocas fáceis em até 30 dias e primeiro ajuste de aro gratuito.</p>"
+            "text": "<p>Trocas fáceis em até 30 dias e primeiro ajuste de aro gratuito.</p>",
+            "link": ""
           }
         },
         "feature_4": {
@@ -37,7 +60,8 @@
           "settings": {
             "icon": "leaf",
             "title": "Origem responsável",
-            "text": "<p>Diamantes certificados e rastreáveis, livres de conflito.</p>"
+            "text": "<p>Diamantes certificados e rastreáveis, livres de conflito.</p>",
+            "link": ""
           }
         }
       },
@@ -46,62 +70,88 @@
         "feature_2",
         "feature_3",
         "feature_4"
-      ]
+      ],
+      "settings": {
+        "heading": "",
+        "color_scheme": "surface",
+        "padding_top": 56,
+        "padding_bottom": 56
+      }
     },
     "signature": {
       "type": "featured-collection",
-      "settings": {}
+      "settings": {
+        "eyebrow": "Assinatura",
+        "heading": "Coleção Assinatura",
+        "text": "<p>Nossos designs icônicos, criados em nosso ateliê.</p>",
+        "collection": "",
+        "products_to_show": 8,
+        "layout": "carousel",
+        "columns": 4,
+        "show_view_all": true,
+        "view_all_label": "Ver coleção",
+        "color_scheme": "default",
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
     },
     "shapes": {
       "type": "shop-by-shape",
-      "settings": {},
       "blocks": {
         "shape_1": {
           "type": "shape",
           "settings": {
-            "label": "Redondo"
+            "label": "Redondo",
+            "link": ""
           }
         },
         "shape_2": {
           "type": "shape",
           "settings": {
-            "label": "Oval"
+            "label": "Oval",
+            "link": ""
           }
         },
         "shape_3": {
           "type": "shape",
           "settings": {
-            "label": "Princesa"
+            "label": "Princesa",
+            "link": ""
           }
         },
         "shape_4": {
           "type": "shape",
           "settings": {
-            "label": "Esmeralda"
+            "label": "Esmeralda",
+            "link": ""
           }
         },
         "shape_5": {
           "type": "shape",
           "settings": {
-            "label": "Pera"
+            "label": "Pera",
+            "link": ""
           }
         },
         "shape_6": {
           "type": "shape",
           "settings": {
-            "label": "Coração"
+            "label": "Coração",
+            "link": ""
           }
         },
         "shape_7": {
           "type": "shape",
           "settings": {
-            "label": "Almofada"
+            "label": "Almofada",
+            "link": ""
           }
         },
         "shape_8": {
           "type": "shape",
           "settings": {
-            "label": "Marquise"
+            "label": "Marquise",
+            "link": ""
           }
         }
       },
@@ -114,97 +164,108 @@
         "shape_6",
         "shape_7",
         "shape_8"
-      ]
+      ],
+      "settings": {
+        "eyebrow": "",
+        "heading": "Comprar por formato",
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
     },
     "categories": {
       "type": "category-tiles",
-      "settings": {},
       "blocks": {
         "tile_1": {
           "type": "tile",
           "settings": {
-            "title": "Diamantes",
-            "text": "<p>Explore a maior seleção de diamantes certificados, escolhidos um a um.</p>",
-            "button_label_1": "Comprar diamantes",
-            "button_label_2": "Saiba mais"
+            "eyebrow": "",
+            "title": "Esmeraldas",
+            "text": "<p>Explore a maior seleção de esmeraldas certificados, escolhidos um a um.</p>",
+            "button_label_1": "Comprar esmeraldas",
+            "button_link_1": "",
+            "button_label_2": "Saiba mais",
+            "button_link_2": ""
           }
         },
         "tile_2": {
           "type": "tile",
           "settings": {
-            "title": "Pedras preciosas",
+            "eyebrow": "",
+            "title": "Extração",
             "text": "<p>As cores mais vibrantes da natureza: safiras, esmeraldas e rubis.</p>",
-            "button_label_1": "Comprar pedras",
-            "button_label_2": "Saiba mais"
-          }
-        },
-        "tile_3": {
-          "type": "tile",
-          "settings": {
-            "title": "Diamantes de laboratório",
-            "text": "<p>Brilho, simetria e pureza excepcionais, com consciência.</p>",
-            "button_label_1": "Comprar",
-            "button_label_2": "Saiba mais"
-          }
-        },
-        "tile_4": {
-          "type": "tile",
-          "settings": {
-            "title": "Diamantes naturais",
-            "text": "<p>Os diamantes naturais do mais alto calibre, com lapidação ideal.</p>",
-            "button_label_1": "Comprar",
-            "button_label_2": "Saiba mais"
+            "button_label_1": "Ver história",
+            "button_link_1": "",
+            "button_label_2": "Saiba mais",
+            "button_link_2": ""
           }
         }
       },
       "block_order": [
         "tile_1",
-        "tile_2",
-        "tile_3",
-        "tile_4"
-      ]
+        "tile_2"
+      ],
+      "settings": {
+        "eyebrow": "",
+        "heading": "",
+        "columns": 2,
+        "style": "below",
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
     },
     "bespoke": {
       "type": "image-with-text",
       "settings": {
         "layout": "image-left",
+        "full_bleed": true,
+        "color_scheme": "surface",
         "eyebrow": "Sob medida",
         "heading": "Uma joia só sua",
-        "button_label_1": "Criar sob medida"
+        "text": "<p>Com nosso serviço de encomenda exclusiva, nossos especialistas transformam sua ideia em uma peça única e inimitável, do primeiro esboço ao acabamento final.</p>",
+        "button_label_1": "Criar sob medida",
+        "button_link_1": "",
+        "button_label_2": "",
+        "button_link_2": "",
+        "padding_top": 64,
+        "padding_bottom": 64
       }
     },
     "press": {
       "type": "logo-list",
-      "settings": {},
       "blocks": {
         "logo_1": {
           "type": "logo",
           "settings": {
-            "name": "Vogue"
+            "name": "Vogue",
+            "link": ""
           }
         },
         "logo_2": {
           "type": "logo",
           "settings": {
-            "name": "Forbes"
+            "name": "Forbes",
+            "link": ""
           }
         },
         "logo_3": {
           "type": "logo",
           "settings": {
-            "name": "Elle"
+            "name": "Elle",
+            "link": ""
           }
         },
         "logo_4": {
           "type": "logo",
           "settings": {
-            "name": "Marie Claire"
+            "name": "Marie Claire",
+            "link": ""
           }
         },
         "logo_5": {
           "type": "logo",
           "settings": {
-            "name": "Harper's Bazaar"
+            "name": "Harper's Bazaar",
+            "link": ""
           }
         }
       },
@@ -214,15 +275,21 @@
         "logo_3",
         "logo_4",
         "logo_5"
-      ]
+      ],
+      "settings": {
+        "heading": "Como visto em",
+        "color_scheme": "default",
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
     },
     "reviews": {
       "type": "testimonials",
-      "settings": {},
       "blocks": {
         "testimonial_1": {
           "type": "testimonial",
           "settings": {
+            "rating": 5,
             "quote": "Atendimento impecável do início ao fim. O anel ficou ainda mais bonito do que imaginávamos.",
             "author": "Mariana S."
           }
@@ -230,6 +297,7 @@
         "testimonial_2": {
           "type": "testimonial",
           "settings": {
+            "rating": 5,
             "quote": "Recebi o certificado do diamante e toda a orientação para escolher a pedra ideal. Recomendo muito!",
             "author": "Rafael T."
           }
@@ -237,6 +305,7 @@
         "testimonial_3": {
           "type": "testimonial",
           "settings": {
+            "rating": 5,
             "quote": "Qualidade excepcional e entrega super segura. Minha noiva amou!",
             "author": "Lucas M."
           }
@@ -244,6 +313,7 @@
         "testimonial_4": {
           "type": "testimonial",
           "settings": {
+            "rating": 5,
             "quote": "A experiência no showroom foi incrível. Me senti muito bem atendida.",
             "author": "Camila R."
           }
@@ -254,24 +324,41 @@
         "testimonial_2",
         "testimonial_3",
         "testimonial_4"
-      ]
+      ],
+      "settings": {
+        "eyebrow": "Avaliações",
+        "heading": "O que nossos clientes dizem",
+        "text": "",
+        "color_scheme": "surface",
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
     },
     "showroom": {
       "type": "image-with-text",
       "settings": {
         "layout": "overlay",
+        "full_bleed": true,
         "color_scheme": "dark",
-        "eyebrow": "Showrooms",
-        "heading": "Visite nosso showroom",
+        "eyebrow": "Saiba mais",
+        "heading": "Sobre a MBM",
         "text": "<p>Descubra nossas joias pessoalmente, com a orientação de um especialista, em um ambiente exclusivo e reservado.</p>",
         "button_label_1": "Agendar visita",
-        "button_label_2": "Conheça nossos showrooms"
+        "button_link_1": "",
+        "button_label_2": "Conheça nossos showrooms",
+        "button_link_2": "",
+        "padding_top": 64,
+        "padding_bottom": 64
       }
     },
     "newsletter": {
       "type": "newsletter",
       "settings": {
-        "color_scheme": "surface"
+        "heading": "Vamos manter contato",
+        "text": "<p>Receba em primeira mão lançamentos, ofertas exclusivas e conteúdos sobre joias.</p>",
+        "color_scheme": "surface",
+        "padding_top": 72,
+        "padding_bottom": 72
       }
     }
   },
