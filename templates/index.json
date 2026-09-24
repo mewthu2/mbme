@@ -74,8 +74,8 @@
       "settings": {
         "heading": "",
         "color_scheme": "surface",
-        "padding_top": 56,
-        "padding_bottom": 56
+        "padding_top": 12,
+        "padding_bottom": 12
       }
     },
     "signature": {
@@ -178,6 +178,8 @@
         "tile_1": {
           "type": "tile",
           "settings": {
+            "video_url": "",
+            "video_controls": false,
             "eyebrow": "",
             "title": "Esmeraldas",
             "text": "<p>Explore a maior seleção de esmeraldas certificados, escolhidos um a um.</p>",
@@ -190,6 +192,8 @@
         "tile_2": {
           "type": "tile",
           "settings": {
+            "video_url": "",
+            "video_controls": false,
             "eyebrow": "",
             "title": "Extração",
             "text": "<p>As cores mais vibrantes da natureza: safiras, esmeraldas e rubis.</p>",
@@ -220,6 +224,7 @@
         "layout": "image-left",
         "full_bleed": true,
         "color_scheme": "surface",
+        "logo_width": 140,
         "eyebrow": "Sob medida",
         "heading": "Uma joia só sua",
         "text": "<p>Com nosso serviço de encomenda exclusiva, nossos especialistas transformam sua ideia em uma peça única e inimitável, do primeiro esboço ao acabamento final.</p>",
@@ -341,6 +346,7 @@
         "layout": "overlay",
         "full_bleed": true,
         "color_scheme": "dark",
+        "logo_width": 140,
         "eyebrow": "Saiba mais",
         "heading": "Sobre a MBM",
         "text": "<p>Descubra nossas joias pessoalmente, com a orientação de um especialista, em um ambiente exclusivo e reservado.</p>",
