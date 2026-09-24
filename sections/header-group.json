@@ -55,6 +55,8 @@
       "settings": {
         "menu": "main-menu",
         "customer_account_menu": "customer-account-main-menu",
+        "logo_position": "left",
+        "mobile_logo_position": "center",
         "sticky": true,
         "show_search": true,
         "show_localization": true,
@@ -64,54 +66,69 @@
     },
     "collections": {
       "type": "collection-strip",
-      "settings": {},
       "blocks": {
         "collection_1": {
           "type": "collection",
           "settings": {
-            "label": "Anéis de noivado"
+            "collection": "",
+            "label": "Anéis de noivado",
+            "link": ""
           }
         },
         "collection_2": {
           "type": "collection",
           "settings": {
-            "label": "Alianças"
+            "collection": "",
+            "label": "Alianças",
+            "link": ""
           }
         },
         "collection_3": {
           "type": "collection",
           "settings": {
-            "label": "Eternidade"
+            "collection": "",
+            "label": "Eternidade",
+            "link": ""
           }
         },
         "collection_4": {
           "type": "collection",
           "settings": {
-            "label": "Brincos"
+            "collection": "",
+            "label": "Brincos",
+            "link": ""
           }
         },
         "collection_5": {
           "type": "collection",
           "settings": {
-            "label": "Colares"
+            "collection": "",
+            "label": "Colares",
+            "link": ""
           }
         },
         "collection_6": {
           "type": "collection",
           "settings": {
-            "label": "Pulseiras"
+            "collection": "",
+            "label": "Pulseiras",
+            "link": ""
           }
         },
         "collection_7": {
           "type": "collection",
           "settings": {
-            "label": "Diamantes"
+            "collection": "",
+            "label": "Esmeraldas",
+            "link": ""
           }
         },
         "collection_8": {
           "type": "collection",
           "settings": {
-            "label": "Pronta entrega"
+            "collection": "",
+            "label": "Pronta entrega",
+            "link": ""
           }
         }
       },
@@ -124,7 +141,14 @@
         "collection_6",
         "collection_7",
         "collection_8"
-      ]
+      ],
+      "settings": {
+        "heading": "Coleções",
+        "style": "circle",
+        "size": "small",
+        "color_scheme": "default",
+        "home_only": true
+      }
     }
   },
   "order": [
