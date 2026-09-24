@@ -12,13 +12,62 @@
     <div class="category-tiles__grid">
       {%- for block in section.blocks -%}
         <article class="category-tile category-tile--{{ section.settings.style }} reveal" {{ block.shopify_attributes }} style="transition-delay: {{ forloop.index0 | times: 120 }}ms;">
-          <a href="{{ block.settings.button_link_1 | default: '#' }}" class="category-tile__media media" tabindex="-1" aria-hidden="true">
-            {%- if block.settings.image -%}
+          {%- liquid
+            assign video = block.settings.video
+            assign video_url = block.settings.video_url
+            assign has_video = false
+            if video != blank or video_url != blank
+              assign has_video = true
+            endif
+            assign media_tag = 'a'
+            if has_video and block.settings.video_controls
+              assign media_tag = 'div'
+            endif
+          -%}
+          <{{ media_tag }}
+            {% if media_tag == 'a' %}href="{{ block.settings.button_link_1 | default: '#' }}" tabindex="-1" aria-hidden="true"{% endif %}
+            class="category-tile__media media{% if has_video %} category-tile__media--video{% endif %}"
+          >
+            {%- if video != blank -%}
+              {%- if block.settings.video_controls -%}
+                {{ video | video_tag: controls: true, playsinline: true, preload: 'metadata', class: 'category-tile__video' }}
+              {%- else -%}
+                {{ video | video_tag: autoplay: true, muted: true, loop: true, playsinline: true, controls: false, preload: 'metadata', class: 'category-tile__video', data-ambient-video: '' }}
+              {%- endif -%}
+            {%- elsif video_url != blank -%}
+              {%- liquid
+                if video_url.type == 'youtube'
+                  if block.settings.video_controls
+                    assign embed = 'https://www.youtube-nocookie.com/embed/' | append: video_url.id | append: '?rel=0&playsinline=1'
+                  else
+                    assign embed = 'https://www.youtube-nocookie.com/embed/' | append: video_url.id | append: '?autoplay=1&mute=1&loop=1&controls=0&rel=0&playsinline=1&modestbranding=1&playlist=' | append: video_url.id
+                  endif
+                else
+                  if block.settings.video_controls
+                    assign embed = 'https://player.vimeo.com/video/' | append: video_url.id | append: '?dnt=1'
+                  else
+                    assign embed = 'https://player.vimeo.com/video/' | append: video_url.id | append: '?background=1&dnt=1'
+                  endif
+                endif
+              -%}
+              {%- if block.settings.image -%}
+                {{ block.settings.image | image_url: width: 1600 | image_tag: loading: 'lazy', widths: '500, 750, 1000, 1300, 1600', sizes: '(min-width: 750px) 50vw, 100vw', class: 'category-tile__poster' }}
+              {%- endif -%}
+              <iframe
+                class="category-tile__embed{% unless block.settings.video_controls %} category-tile__embed--ambient{% endunless %}"
+                src="{{ embed }}"
+                title="{{ block.settings.title | escape }}"
+                loading="lazy"
+                allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+                allowfullscreen
+                {% unless block.settings.video_controls %}tabindex="-1"{% endunless %}
+              ></iframe>
+            {%- elsif block.settings.image -%}
               {{ block.settings.image | image_url: width: 1600 | image_tag: loading: 'lazy', widths: '500, 750, 1000, 1300, 1600', sizes: '(min-width: 750px) 50vw, 100vw' }}
             {%- else -%}
               {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
             {%- endif -%}
-          </a>
+          </{{ media_tag }}>
           <div class="category-tile__content">
             {%- if block.settings.eyebrow != blank -%}<span class="eyebrow">{{ block.settings.eyebrow }}</span>{%- endif -%}
             <h3 class="category-tile__title">{{ block.settings.title }}</h3>
@@ -57,11 +106,42 @@
     aspect-ratio: 4 / 5;
   }
 
-  .category-tile__media img {
+  .category-tile__media img,
+  .category-tile__video {
     transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
-  .category-tile:hover .category-tile__media img {
+  .category-tile__media--video {
+    container-type: size;
+  }
+
+  .category-tile__video,
+  .category-tile__poster {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .category-tile__embed {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+
+  .category-tile__embed--ambient {
+    inset: 50% auto auto 50%;
+    width: max(100cqw, 100cqh * 16 / 9);
+    height: max(100cqh, 100cqw * 9 / 16);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+
+  .category-tile:hover .category-tile__media img,
+  .category-tile:hover .category-tile__video {
     transform: scale(1.05);
   }
 
@@ -110,6 +190,30 @@
   }
 {% endstylesheet %}
 
+{% javascript %}
+  class CategoryTileVideos {
+    static init(root = document) {
+      const videos = root.querySelectorAll('[data-ambient-video]');
+      if (!videos.length) return;
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          const video = entry.target;
+          if (entry.isIntersecting && !reduceMotion) video.play().catch(() => {});
+          else video.pause();
+        });
+      });
+      videos.forEach((video) => {
+        if (reduceMotion) video.removeAttribute('autoplay');
+        observer.observe(video);
+      });
+    }
+  }
+
+  CategoryTileVideos.init();
+  document.addEventListener('shopify:section:load', (event) => CategoryTileVideos.init(event.target));
+{% endjavascript %}
+
 {% schema %}
 {
   "name": "Blocos de categoria",
@@ -137,7 +241,12 @@
       "type": "tile",
       "name": "Categoria",
       "settings": [
-        { "type": "image_picker", "id": "image", "label": "Imagem" },
+        { "type": "image_picker", "id": "image", "label": "Imagem", "info": "Também é usada como capa enquanto o vídeo do YouTube/Vimeo carrega." },
+        { "type": "header", "content": "Vídeo" },
+        { "type": "video", "id": "video", "label": "Vídeo (enviado para a Shopify)", "info": "Substitui a imagem. Recomendado: MP4 curto, sem áudio, formato retrato 4:5." },
+        { "type": "video_url", "id": "video_url", "label": "Ou link do YouTube/Vimeo", "accept": ["youtube", "vimeo"] },
+        { "type": "checkbox", "id": "video_controls", "label": "Mostrar controles do player", "default": false, "info": "Desativado: o vídeo roda em loop, sem som, como fundo animado." },
+        { "type": "header", "content": "Conteúdo" },
         { "type": "text", "id": "eyebrow", "label": "Sobretítulo" },
         { "type": "text", "id": "title", "label": "Título", "default": "Diamantes" },
         { "type": "richtext", "id": "text", "label": "Texto", "default": "<p>Explore a maior seleção de diamantes certificados.</p>" },
