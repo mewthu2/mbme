@@ -1,0 +1,55 @@
+<section
+  class="newsletter full-width section-spacing color-scheme--{{ section.settings.color_scheme }}"
+  style="--section-padding-top: {{ section.settings.padding_top }}px; --section-padding-bottom: {{ section.settings.padding_bottom }}px;"
+>
+  <div class="page-width newsletter__inner">
+    {%- if section.settings.heading != blank -%}<h2>{{ section.settings.heading }}</h2>{%- endif -%}
+    {%- if section.settings.text != blank -%}<div class="newsletter__text">{{ section.settings.text }}</div>{%- endif -%}
+    {% render 'newsletter-form', id: section.id %}
+  </div>
+</section>
+
+{% stylesheet %}
+  .newsletter__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    text-align: center;
+  }
+
+  .newsletter__text {
+    max-width: 36rem;
+    color: var(--color-muted);
+  }
+
+  .newsletter__inner .newsletter-form {
+    width: min(100%, 32rem);
+    margin-block-start: 1rem;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Newsletter",
+  "class": "section-newsletter",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Título", "default": "Vamos manter contato" },
+    { "type": "richtext", "id": "text", "label": "Texto", "default": "<p>Receba em primeira mão lançamentos, ofertas exclusivas e conteúdos sobre joias.</p>" },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Fundo",
+      "options": [
+        { "value": "default", "label": "Padrão" },
+        { "value": "surface", "label": "Claro" },
+        { "value": "dark", "label": "Escuro" }
+      ],
+      "default": "default"
+    },
+    { "type": "range", "id": "padding_top", "label": "Espaço superior", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 72 },
+    { "type": "range", "id": "padding_bottom", "label": "Espaço inferior", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 72 }
+  ],
+  "presets": [{ "name": "Newsletter" }]
+}
+{% endschema %}

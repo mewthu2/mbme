@@ -1,0 +1,85 @@
+<section
+  class="rich-text full-width section-spacing color-scheme--{{ section.settings.color_scheme }}"
+  style="--section-padding-top: {{ section.settings.padding_top }}px; --section-padding-bottom: {{ section.settings.padding_bottom }}px;"
+>
+  <div class="page-width rich-text__inner rich-text__inner--{{ section.settings.alignment }} reveal">
+    {%- if section.settings.eyebrow != blank -%}<span class="eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+    {%- if section.settings.heading != blank -%}<h2>{{ section.settings.heading }}</h2>{%- endif -%}
+    {%- if section.settings.text != blank -%}<div class="rich-text__text rte">{{ section.settings.text }}</div>{%- endif -%}
+    {%- if section.settings.button_label != blank -%}
+      <a href="{{ section.settings.button_link | default: '#' }}" class="button{% if section.settings.button_style == 'secondary' %} button--secondary{% endif %}">{{ section.settings.button_label }}</a>
+    {%- endif -%}
+  </div>
+</section>
+
+{% stylesheet %}
+  .rich-text__inner {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    max-width: 50rem;
+  }
+
+  .rich-text__inner--center {
+    align-items: center;
+    margin-inline: auto;
+    text-align: center;
+  }
+
+  .rich-text__inner--left {
+    align-items: flex-start;
+  }
+
+  .rich-text__text {
+    color: var(--color-muted);
+    font-size: 1.0625rem;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Texto",
+  "class": "section-rich-text",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Sobretítulo" },
+    { "type": "text", "id": "heading", "label": "Título", "default": "Joias para toda a vida" },
+    { "type": "richtext", "id": "text", "label": "Texto", "default": "<p>Conte a história da sua marca e o que torna suas peças especiais.</p>" },
+    { "type": "text", "id": "button_label", "label": "Botão - texto" },
+    { "type": "url", "id": "button_link", "label": "Botão - link" },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Estilo do botão",
+      "options": [
+        { "value": "primary", "label": "Principal" },
+        { "value": "secondary", "label": "Secundário" }
+      ],
+      "default": "primary"
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "Alinhamento",
+      "options": [
+        { "value": "left", "label": "Esquerda" },
+        { "value": "center", "label": "Centro" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Fundo",
+      "options": [
+        { "value": "default", "label": "Padrão" },
+        { "value": "surface", "label": "Claro" },
+        { "value": "dark", "label": "Escuro" }
+      ],
+      "default": "default"
+    },
+    { "type": "range", "id": "padding_top", "label": "Espaço superior", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 72 },
+    { "type": "range", "id": "padding_bottom", "label": "Espaço inferior", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 72 }
+  ],
+  "presets": [{ "name": "Texto" }]
+}
+{% endschema %}

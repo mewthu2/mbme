@@ -1,0 +1,130 @@
+<div class="cart-page page-width section-spacing">
+  <div class="section-header">
+    <h1>{{ 'cart.title' | t }}</h1>
+  </div>
+
+  {%- if cart.item_count > 0 -%}
+    <form action="{{ routes.cart_url }}" method="post" id="CartForm" class="cart-page__layout">
+      <div class="cart-page__items">
+        {% render 'cart-line-items', context: 'page' %}
+        <noscript><button type="submit" class="button button--secondary">{{ 'cart.update' | t }}</button></noscript>
+      </div>
+
+      <aside class="cart-page__summary">
+        {%- if settings.cart_show_note -%}
+          <div class="field">
+            <label for="CartNote">{{ 'cart.note' | t }}</label>
+            <textarea id="CartNote" name="note" rows="3">{{ cart.note }}</textarea>
+          </div>
+        {%- endif -%}
+        {%- for discount in cart.cart_level_discount_applications -%}
+          <p class="cart-page__row cart-page__discount">
+            <span>{{ discount.title }}</span>
+            <span>-{{ discount.total_allocated_amount | money }}</span>
+          </p>
+        {%- endfor -%}
+        <p class="cart-page__row cart-page__total">
+          <span>{{ 'cart.subtotal' | t }}</span>
+          <span>{{ cart.total_price | money_with_currency }}</span>
+        </p>
+        <p class="cart-page__taxes">{{ 'cart.taxes_and_shipping' | t }}</p>
+        <button type="submit" name="checkout" class="button button--full">{{ 'cart.checkout' | t }}</button>
+        {%- if additional_checkout_buttons -%}
+          <div class="cart-page__dynamic">{{ content_for_additional_checkout_buttons }}</div>
+        {%- endif -%}
+        {%- if settings.cart_free_shipping_text != blank -%}
+          <p class="cart-page__notice">{% render 'icon', name: 'truck' %}{{ settings.cart_free_shipping_text }}</p>
+        {%- endif -%}
+      </aside>
+    </form>
+  {%- else -%}
+    <div class="cart-page__empty">
+      <p>{{ 'cart.empty' | t }}</p>
+      <a href="{{ routes.all_products_collection_url }}" class="button">{{ 'cart.continue_shopping' | t }}</a>
+    </div>
+  {%- endif -%}
+</div>
+
+{% stylesheet %}
+  .cart-page__layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 24rem;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .cart-page__items .cart-items {
+    border-top: 1px solid var(--color-border);
+  }
+
+  .cart-page__summary {
+    position: sticky;
+    top: 8rem;
+    display: grid;
+    gap: 1rem;
+    padding: 2rem;
+    background: var(--color-surface);
+  }
+
+  .cart-page__row {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .cart-page__total {
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .cart-page__discount {
+    color: var(--color-sale);
+  }
+
+  .cart-page__taxes {
+    font-size: 0.75rem;
+    color: var(--color-muted);
+  }
+
+  .cart-page__notice {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8125rem;
+  }
+
+  .cart-page__empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    padding-block: 3rem;
+  }
+
+  @media (max-width: 989px) {
+    .cart-page__layout {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+  }
+{% endstylesheet %}
+
+{% javascript %}
+  document.addEventListener('change', (event) => {
+    const input = event.target.closest('#CartForm input[name="updates[]"]');
+    if (input) input.form.submit();
+  });
+  document.addEventListener('click', (event) => {
+    const remove = event.target.closest('#CartForm [data-line-remove]');
+    if (!remove) return;
+    event.preventDefault();
+    window.location.href = remove.href;
+  });
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Carrinho",
+  "settings": []
+}
+{% endschema %}

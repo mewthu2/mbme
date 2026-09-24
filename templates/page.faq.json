@@ -1,0 +1,49 @@
+{
+  "sections": {
+    "main": {
+      "type": "page",
+      "settings": {}
+    },
+    "faq": {
+      "type": "faq",
+      "settings": {},
+      "blocks": {
+        "question_1": {
+          "type": "question",
+          "settings": {}
+        },
+        "question_2": {
+          "type": "question",
+          "settings": {
+            "question": "Qual o prazo de entrega?",
+            "answer": "<p>Peças em estoque são enviadas em até 3 dias úteis. Peças sob encomenda levam de 3 a 5 semanas.</p>"
+          }
+        },
+        "question_3": {
+          "type": "question",
+          "settings": {
+            "question": "Posso ajustar o tamanho do anel?",
+            "answer": "<p>Sim, o primeiro ajuste de aro é gratuito em até 60 dias após a compra.</p>"
+          }
+        },
+        "question_4": {
+          "type": "question",
+          "settings": {
+            "question": "Como funciona a troca?",
+            "answer": "<p>Você tem até 30 dias para trocar ou devolver sua peça, sem custo.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "question_1",
+        "question_2",
+        "question_3",
+        "question_4"
+      ]
+    }
+  },
+  "order": [
+    "main",
+    "faq"
+  ]
+}

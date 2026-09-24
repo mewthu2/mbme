@@ -1,0 +1,30 @@
+{% doc %}
+  Renders the social media links configured in theme settings.
+
+  @example
+  {% render 'social-icons' %}
+{% enddoc %}
+
+{%- capture links -%}
+  {%- if settings.social_instagram_link != blank -%}<li><a href="{{ settings.social_instagram_link }}" target="_blank" rel="noopener" class="icon-button" aria-label="Instagram">{% render 'icon', name: 'instagram' %}</a></li>{%- endif -%}
+  {%- if settings.social_facebook_link != blank -%}<li><a href="{{ settings.social_facebook_link }}" target="_blank" rel="noopener" class="icon-button" aria-label="Facebook">{% render 'icon', name: 'facebook' %}</a></li>{%- endif -%}
+  {%- if settings.social_pinterest_link != blank -%}<li><a href="{{ settings.social_pinterest_link }}" target="_blank" rel="noopener" class="icon-button" aria-label="Pinterest">{% render 'icon', name: 'pinterest' %}</a></li>{%- endif -%}
+  {%- if settings.social_tiktok_link != blank -%}<li><a href="{{ settings.social_tiktok_link }}" target="_blank" rel="noopener" class="icon-button" aria-label="TikTok">{% render 'icon', name: 'tiktok' %}</a></li>{%- endif -%}
+  {%- if settings.social_youtube_link != blank -%}<li><a href="{{ settings.social_youtube_link }}" target="_blank" rel="noopener" class="icon-button" aria-label="YouTube">{% render 'icon', name: 'youtube' %}</a></li>{%- endif -%}
+  {%- if settings.social_twitter_link != blank -%}<li><a href="{{ settings.social_twitter_link }}" target="_blank" rel="noopener" class="icon-button" aria-label="X">{% render 'icon', name: 'twitter' %}</a></li>{%- endif -%}
+  {%- if settings.social_linkedin_link != blank -%}<li><a href="{{ settings.social_linkedin_link }}" target="_blank" rel="noopener" class="icon-button" aria-label="LinkedIn">{% render 'icon', name: 'linkedin' %}</a></li>{%- endif -%}
+{%- endcapture -%}
+
+{%- if links != blank -%}
+  <ul class="social-icons" role="list">{{ links }}</ul>
+{%- endif -%}
+
+{% stylesheet %}
+  .social-icons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+    padding: 0;
+    list-style: none;
+  }
+{% endstylesheet %}

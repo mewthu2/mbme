@@ -1,0 +1,158 @@
+{
+  "404": {
+    "title": "Page not found",
+    "not_found": "The page you were looking for doesn't exist or has been moved.",
+    "back_to_shopping": "Continue shopping"
+  },
+  "accessibility": {
+    "skip_to_content": "Skip to content"
+  },
+  "general": {
+    "breadcrumbs": "Breadcrumbs",
+    "close": "Close",
+    "home": "Home",
+    "next": "Next",
+    "previous": "Previous",
+    "pagination": "Pagination",
+    "product_placeholder": "Product name",
+    "rating": "{{ rating }} out of 5 stars",
+    "whatsapp": "Chat with us on WhatsApp"
+  },
+  "header": {
+    "account": "Account",
+    "cart": "Cart",
+    "main_navigation": "Main navigation",
+    "menu": "Menu",
+    "search": "Search",
+    "view_all": "View all {{ title }}"
+  },
+  "localization": {
+    "country": "Country/region",
+    "language": "Language",
+    "update": "Update"
+  },
+  "newsletter": {
+    "label": "Email address",
+    "button": "Subscribe",
+    "success": "Thanks for subscribing!"
+  },
+  "footer": {
+    "rights": "All rights reserved."
+  },
+  "blog": {
+    "all": "All",
+    "article_comments": "Comments",
+    "article_metadata_html": "{{ date }} by {{ author }}",
+    "comment_form_body": "Comment",
+    "comment_form_email": "Email",
+    "comment_form_name": "Name",
+    "comment_form_submit": "Post comment",
+    "comment_form_title": "Leave a comment",
+    "comment_moderated": "Your comment was submitted and will be published after approval.",
+    "comment_posted": "Your comment was posted.",
+    "read_more": "Read more"
+  },
+  "cart": {
+    "checkout": "Checkout",
+    "continue_shopping": "Continue shopping",
+    "decrease": "Decrease quantity for {{ product }}",
+    "increase": "Increase quantity for {{ product }}",
+    "empty": "Your cart is empty.",
+    "error": "Something went wrong. Please try again.",
+    "note": "Order note",
+    "quantity": "Quantity",
+    "quantity_for": "Quantity for {{ product }}",
+    "remove": "Remove",
+    "subtotal": "Subtotal",
+    "taxes_and_shipping": "Taxes and shipping calculated at checkout.",
+    "title": "Your cart",
+    "update": "Update",
+    "view_cart": "View cart"
+  },
+  "collections": {
+    "apply": "Apply",
+    "clear_all": "Clear all",
+    "empty": "No products found.",
+    "filter": "Filter",
+    "from": "From",
+    "to": "To",
+    "product_count": {
+      "one": "{{ count }} product",
+      "other": "{{ count }} products"
+    },
+    "sort_by": "Sort by",
+    "title": "Collections"
+  },
+  "contact": {
+    "afternoon": "Afternoon (12pm – 6pm)",
+    "appointment_subject": "Appointment request",
+    "appointment_type": "Appointment type",
+    "book": "Request appointment",
+    "date": "Preferred date",
+    "email": "Email",
+    "evening": "Evening (after 6pm)",
+    "in_person": "In person",
+    "interest": "What are you looking for?",
+    "location": "Showroom",
+    "message": "Message",
+    "morning": "Morning (9am – 12pm)",
+    "name": "Name",
+    "phone": "Phone",
+    "send": "Send message",
+    "subject": "Subject",
+    "success": "Thanks for reaching out! We'll get back to you shortly.",
+    "time": "Preferred time",
+    "virtual": "Virtual (video call)"
+  },
+  "gift_card": {
+    "add_to_apple_wallet": "Add to Apple Wallet",
+    "card": "Gift card",
+    "expired": "This gift card has expired",
+    "expires_on": "Expires on {{ expires_on }}",
+    "use_at_checkout": "Use this gift card at checkout"
+  },
+  "password": {
+    "enter": "Enter",
+    "login": "Enter with password",
+    "password": "Password",
+    "title": "Opening soon"
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Add to bag",
+      "discount": "-{{ percent }}%",
+      "installments_html": "or <strong>{{ parcels }}x of {{ amount }}</strong> interest-free",
+      "low_stock": {
+        "one": "Only {{ count }} left",
+        "other": "Only {{ count }} left"
+      },
+      "media_label": "Show media {{ index }} of {{ count }}",
+      "price_from": "From",
+      "regular_price": "Regular price",
+      "sale_price": "Sale price",
+      "size_guide": "Size guide",
+      "sku": "SKU",
+      "sold_out": "Sold out",
+      "taxes_included": "Taxes included.",
+      "unavailable": "Unavailable",
+      "whatsapp": "WhatsApp",
+      "whatsapp_message": "Hi! I'd like more information about {{ product }}.",
+      "zoom": "Zoom image"
+    }
+  },
+  "search": {
+    "collections": "Collections",
+    "no_results_html": "No results found for “{{ terms }}”.",
+    "page": "Page",
+    "pages": "Pages & articles",
+    "placeholder": "Search rings, diamonds, jewellery…",
+    "products": "Products",
+    "results_for_html": {
+      "one": "{{ count }} result for “{{ terms }}”",
+      "other": "{{ count }} results for “{{ terms }}”"
+    },
+    "submit": "Search",
+    "title": "Search",
+    "view_all": "View all results for “{{ terms }}”"
+  }
+}

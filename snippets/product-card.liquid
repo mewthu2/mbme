@@ -1,0 +1,147 @@
+{% doc %}
+  Renders a product card with hover image, sale badge and price.
+
+  @param {product} product - The product to render
+  @param {string} [sizes] - The sizes attribute for responsive images
+  @param {boolean} [lazy] - Lazy-load the image (default true)
+
+  @example
+  {% render 'product-card', product: product, sizes: '(min-width: 990px) 25vw, 50vw' %}
+{% enddoc %}
+
+{%- liquid
+  assign sizes = sizes | default: '(min-width: 990px) 25vw, 50vw'
+  assign loading = 'lazy'
+  if lazy == false
+    assign loading = 'eager'
+  endif
+  assign second_image = product.media[1].preview_image
+  assign has_second = false
+  if settings.card_show_second_image and second_image
+    assign has_second = true
+  endif
+  assign image_alt = product.featured_media.alt | default: product.title
+  assign discount = 0
+  if product.compare_at_price > product.price
+    assign discount = product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round
+  endif
+-%}
+
+<article class="product-card{% if has_second %} product-card--has-hover{% endif %}">
+  <a href="{{ product.url }}" class="product-card__media media" tabindex="-1" aria-hidden="true">
+    {%- if product.featured_media -%}
+      {{ product.featured_media.preview_image | image_url: width: 1200 | image_tag: loading: loading, widths: '300, 450, 600, 800, 1000, 1200', sizes: sizes, class: 'product-card__image', alt: image_alt }}
+      {%- if has_second -%}
+        {{ second_image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '300, 450, 600, 800, 1000, 1200', sizes: sizes, class: 'product-card__image product-card__image--hover', alt: '' }}
+      {%- endif -%}
+    {%- else -%}
+      {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+    {%- endif -%}
+  </a>
+
+  <div class="product-card__badges">
+    {%- if product.available == false -%}
+      <span class="badge badge--sold-out">{{ 'products.product.sold_out' | t }}</span>
+    {%- elsif settings.card_show_sale_badge and discount > 0 -%}
+      <span class="badge badge--sale">{{ 'products.product.discount' | t: percent: discount }}</span>
+    {%- endif -%}
+  </div>
+
+  <div class="product-card__info">
+    {%- if settings.card_show_vendor -%}
+      <span class="product-card__vendor">{{ product.vendor }}</span>
+    {%- endif -%}
+    <h3 class="product-card__title">
+      <a href="{{ product.url }}">{{ product.title | escape }}</a>
+    </h3>
+    {% render 'price', product: product, show_from: true, class: 'product-card__price' %}
+  </div>
+</article>
+
+{% stylesheet %}
+  .product-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    height: 100%;
+  }
+
+  .product-card__media {
+    display: block;
+    aspect-ratio: var(--card-image-ratio);
+  }
+
+  .product-card__image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.5s ease, transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .product-card__image--hover {
+    opacity: 0;
+  }
+
+  .product-card:hover .product-card__image {
+    transform: scale(1.04);
+  }
+
+  .product-card--has-hover:hover .product-card__image--hover {
+    opacity: 1;
+  }
+
+  .product-card--has-hover:hover .product-card__image:not(.product-card__image--hover) {
+    opacity: 0;
+  }
+
+  .product-card__badges {
+    position: absolute;
+    top: 0.75rem;
+    left: 0.75rem;
+    display: flex;
+    gap: 0.375rem;
+    pointer-events: none;
+  }
+
+  .product-card__info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.375rem;
+    text-align: center;
+  }
+
+  .product-card__vendor {
+    font-size: 0.6875rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
+
+  .product-card__title {
+    font-family: var(--font-primary--family);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    line-height: 1.5;
+  }
+
+  .product-card__title a {
+    text-decoration: none;
+  }
+
+  .product-card__title a::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+  }
+
+  .product-card__price {
+    justify-content: center;
+    font-size: 0.875rem;
+  }
+{% endstylesheet %}

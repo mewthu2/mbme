@@ -1,0 +1,64 @@
+{% doc %}
+  Renders a blog article card.
+
+  @param {article} article - The article to render
+
+  @example
+  {% render 'article-card', article: article %}
+{% enddoc %}
+
+<article class="article-card">
+  <a href="{{ article.url }}" class="article-card__media media" tabindex="-1" aria-hidden="true">
+    {%- if article.image -%}
+      {{ article.image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '400, 600, 800, 1200', sizes: '(min-width: 990px) 33vw, 100vw', alt: article.image.alt }}
+    {%- else -%}
+      {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+    {%- endif -%}
+  </a>
+  <div class="article-card__content">
+    <span class="eyebrow">{{ article.published_at | time_tag: format: 'date' }}</span>
+    <h3 class="article-card__title"><a href="{{ article.url }}">{{ article.title | escape }}</a></h3>
+    <p class="article-card__excerpt">{{ article.excerpt_or_content | strip_html | truncatewords: 24 }}</p>
+    <a href="{{ article.url }}" class="link">{{ 'blog.read_more' | t }}</a>
+  </div>
+</article>
+
+{% stylesheet %}
+  .article-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .article-card__media {
+    display: block;
+    aspect-ratio: 3 / 2;
+  }
+
+  .article-card__media img {
+    transition: transform 1s ease;
+  }
+
+  .article-card:hover .article-card__media img {
+    transform: scale(1.04);
+  }
+
+  .article-card__content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .article-card__title {
+    font-size: 1.375rem;
+  }
+
+  .article-card__title a {
+    text-decoration: none;
+  }
+
+  .article-card__excerpt {
+    color: var(--color-muted);
+  }
+{% endstylesheet %}

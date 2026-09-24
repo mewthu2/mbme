@@ -1,0 +1,73 @@
+{
+  "sections": {
+    "main": {
+      "type": "product",
+      "settings": {},
+      "blocks": {
+        "title_1": {
+          "type": "title",
+          "settings": {}
+        },
+        "price_2": {
+          "type": "price",
+          "settings": {}
+        },
+        "variant_picker_3": {
+          "type": "variant_picker",
+          "settings": {}
+        },
+        "buy_buttons_4": {
+          "type": "buy_buttons",
+          "settings": {}
+        },
+        "appointment_5": {
+          "type": "appointment",
+          "settings": {}
+        },
+        "trust_6": {
+          "type": "trust",
+          "settings": {}
+        },
+        "description_7": {
+          "type": "description",
+          "settings": {
+            "heading": "Detalhes"
+          }
+        },
+        "collapsible_tab_8": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Entrega e devoluções",
+            "content": "<p>Frete grátis e segurado para todo o Brasil. Trocas e devoluções em até 30 dias.</p>"
+          }
+        },
+        "collapsible_tab_9": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Garantia e certificado",
+            "content": "<p>Todas as peças acompanham certificado de autenticidade e garantia vitalícia contra defeitos de fabricação.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "title_1",
+        "price_2",
+        "variant_picker_3",
+        "buy_buttons_4",
+        "appointment_5",
+        "trust_6",
+        "description_7",
+        "collapsible_tab_8",
+        "collapsible_tab_9"
+      ]
+    },
+    "related": {
+      "type": "related-products",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main",
+    "related"
+  ]
+}

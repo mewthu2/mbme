@@ -1,0 +1,146 @@
+<div id="PredictiveSearchContent">
+  {%- if predictive_search.performed -%}
+    {%- assign resources = predictive_search.resources -%}
+    {%- if resources.products.size > 0 or resources.collections.size > 0 or resources.pages.size > 0 or resources.articles.size > 0 -%}
+      <div class="predictive-search">
+        <div class="predictive-search__links">
+          {%- if resources.collections.size > 0 -%}
+            <div>
+              <h2 class="predictive-search__heading">{{ 'search.collections' | t }}</h2>
+              <ul role="list">
+                {%- for collection in resources.collections -%}
+                  <li><a href="{{ collection.url }}">{{ collection.title }}</a></li>
+                {%- endfor -%}
+              </ul>
+            </div>
+          {%- endif -%}
+          {%- if resources.pages.size > 0 or resources.articles.size > 0 -%}
+            <div>
+              <h2 class="predictive-search__heading">{{ 'search.pages' | t }}</h2>
+              <ul role="list">
+                {%- for page in resources.pages -%}
+                  <li><a href="{{ page.url }}">{{ page.title }}</a></li>
+                {%- endfor -%}
+                {%- for article in resources.articles -%}
+                  <li><a href="{{ article.url }}">{{ article.title }}</a></li>
+                {%- endfor -%}
+              </ul>
+            </div>
+          {%- endif -%}
+        </div>
+        {%- if resources.products.size > 0 -%}
+          <div class="predictive-search__products">
+            <h2 class="predictive-search__heading">{{ 'search.products' | t }}</h2>
+            <ul role="list" class="predictive-search__grid">
+              {%- for product in resources.products -%}
+                <li>
+                  <a href="{{ product.url }}" class="predictive-search__product">
+                    <span class="media">
+                      {%- if product.featured_image -%}
+                        {{ product.featured_image | image_url: width: 300 | image_tag: loading: 'lazy', alt: product.title }}
+                      {%- else -%}
+                        {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                      {%- endif -%}
+                    </span>
+                    <span class="predictive-search__title">{{ product.title }}</span>
+                    {% render 'price', product: product, show_from: true %}
+                  </a>
+                </li>
+              {%- endfor -%}
+            </ul>
+          </div>
+        {%- endif -%}
+      </div>
+      <a class="link predictive-search__all" href="{{ routes.search_url }}?q={{ predictive_search.terms | url_encode }}&options[prefix]=last">
+        {{ 'search.view_all' | t: terms: predictive_search.terms }}
+      </a>
+    {%- else -%}
+      <p class="predictive-search__empty">{{ 'search.no_results_html' | t: terms: predictive_search.terms }}</p>
+    {%- endif -%}
+  {%- endif -%}
+</div>
+
+{% stylesheet %}
+  .predictive-search {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    gap: 2.5rem;
+    padding-block: 2rem 1.5rem;
+    max-height: 60vh;
+    overflow-y: auto;
+  }
+
+  .predictive-search__heading {
+    margin-block-end: 1rem;
+    font-family: var(--font-primary--family);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
+
+  .predictive-search__links {
+    display: grid;
+    align-content: start;
+    gap: 2rem;
+  }
+
+  .predictive-search__links ul {
+    display: grid;
+    gap: 0.5rem;
+    padding: 0;
+    list-style: none;
+  }
+
+  .predictive-search__links a {
+    text-decoration: none;
+  }
+
+  .predictive-search__links a:hover {
+    color: var(--color-accent);
+  }
+
+  .predictive-search__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr));
+    gap: 1.25rem;
+    padding: 0;
+    list-style: none;
+  }
+
+  .predictive-search__product {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    font-size: 0.8125rem;
+    text-decoration: none;
+  }
+
+  .predictive-search__product .media {
+    aspect-ratio: 1;
+  }
+
+  .predictive-search__title {
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .predictive-search__empty {
+    padding-block: 2rem;
+    color: var(--color-muted);
+  }
+
+  @media (max-width: 749px) {
+    .predictive-search {
+      grid-template-columns: 1fr;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Busca preditiva",
+  "settings": []
+}
+{% endschema %}

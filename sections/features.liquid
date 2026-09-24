@@ -1,0 +1,160 @@
+<section
+  class="features full-width color-scheme--{{ section.settings.color_scheme }} section-spacing"
+  style="--section-padding-top: {{ section.settings.padding_top }}px; --section-padding-bottom: {{ section.settings.padding_bottom }}px;"
+>
+  <div class="page-width">
+    {%- if section.settings.heading != blank -%}
+      <div class="section-header">
+        <h2>{{ section.settings.heading }}</h2>
+      </div>
+    {%- endif -%}
+    <ul class="features__grid" role="list" style="--columns: {{ section.blocks.size | at_most: 4 | at_least: 1 }};">
+      {%- for block in section.blocks -%}
+        <li class="features__item reveal" {{ block.shopify_attributes }} style="transition-delay: {{ forloop.index0 | times: 100 }}ms;">
+          {%- if block.settings.image -%}
+            {{ block.settings.image | image_url: width: 160 | image_tag: class: 'features__image', loading: 'lazy', alt: '' }}
+          {%- else -%}
+            <span class="features__icon">{% render 'icon', name: block.settings.icon %}</span>
+          {%- endif -%}
+          <h3 class="features__title">
+            {%- if block.settings.link != blank -%}
+              <a href="{{ block.settings.link }}">{{ block.settings.title }}</a>
+            {%- else -%}
+              {{ block.settings.title }}
+            {%- endif -%}
+          </h3>
+          {%- if block.settings.text != blank -%}
+            <div class="features__text">{{ block.settings.text }}</div>
+          {%- endif -%}
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</section>
+
+{% stylesheet %}
+  .features__grid {
+    display: grid;
+    grid-template-columns: repeat(var(--columns), minmax(0, 1fr));
+    gap: 2.5rem;
+    padding: 0;
+    list-style: none;
+  }
+
+  .features__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    text-align: center;
+  }
+
+  .features__icon {
+    display: grid;
+    place-items: center;
+    width: 3.5rem;
+    height: 3.5rem;
+    color: var(--color-accent);
+  }
+
+  .features__icon .icon {
+    width: 2.25rem;
+    height: 2.25rem;
+  }
+
+  .features__image {
+    width: 3.5rem;
+    height: 3.5rem;
+    object-fit: contain;
+  }
+
+  .features__title {
+    font-family: var(--font-primary--family);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .features__title a {
+    text-decoration: none;
+  }
+
+  .features__text {
+    max-width: 18rem;
+    font-size: 0.875rem;
+    color: var(--color-muted);
+  }
+
+  @media (max-width: 749px) {
+    .features__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 2rem 1.25rem;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Diferenciais",
+  "class": "section-features",
+  "max_blocks": 8,
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Título" },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Fundo",
+      "options": [
+        { "value": "default", "label": "Padrão" },
+        { "value": "surface", "label": "Claro" },
+        { "value": "dark", "label": "Escuro" }
+      ],
+      "default": "surface"
+    },
+    { "type": "range", "id": "padding_top", "label": "Espaço superior", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 56 },
+    { "type": "range", "id": "padding_bottom", "label": "Espaço inferior", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 56 }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Diferencial",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Ícone",
+          "options": [
+            { "value": "diamond", "label": "Diamante" },
+            { "value": "ring", "label": "Anel" },
+            { "value": "hand", "label": "Mão / artesanal" },
+            { "value": "chat", "label": "Atendimento" },
+            { "value": "return", "label": "Trocas" },
+            { "value": "leaf", "label": "Sustentabilidade" },
+            { "value": "truck", "label": "Entrega" },
+            { "value": "shield", "label": "Garantia" },
+            { "value": "certificate", "label": "Certificado" },
+            { "value": "calendar", "label": "Agenda" }
+          ],
+          "default": "diamond"
+        },
+        { "type": "image_picker", "id": "image", "label": "Ícone personalizado", "info": "Substitui o ícone acima." },
+        { "type": "text", "id": "title", "label": "Título", "default": "Feito à mão" },
+        { "type": "richtext", "id": "text", "label": "Texto", "default": "<p>Cada peça é criada por nossos ourives com precisão e cuidado.</p>" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Diferenciais",
+      "blocks": [
+        { "type": "feature", "settings": { "icon": "hand", "title": "Design artesanal" } },
+        { "type": "feature", "settings": { "icon": "chat", "title": "Consultoria especializada", "text": "<p>Especialistas prontos para ajudar você a escolher a peça perfeita.</p>" } },
+        { "type": "feature", "settings": { "icon": "return", "title": "Trocas e ajuste de aro", "text": "<p>Trocas fáceis em até 30 dias e primeiro ajuste de aro gratuito.</p>" } },
+        { "type": "feature", "settings": { "icon": "leaf", "title": "Origem responsável", "text": "<p>Diamantes certificados e rastreáveis, livres de conflito.</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

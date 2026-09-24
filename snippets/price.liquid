@@ -1,0 +1,71 @@
+{% doc %}
+  Renders a product or variant price with compare-at price and "from" prefix.
+
+  @param {product} product - The product
+  @param {variant} [variant] - Optional variant; defaults to the selected or first available variant
+  @param {boolean} [show_from] - Show "from" prefix when prices vary
+  @param {string} [class] - Extra CSS class
+
+  @example
+  {% render 'price', product: product, show_from: true %}
+{% enddoc %}
+
+{%- liquid
+  assign target = variant | default: product.selected_or_first_available_variant
+  assign price = target.price
+  assign compare_at = target.compare_at_price
+  if show_from and product.price_varies
+    assign price = product.price_min
+    assign compare_at = product.compare_at_price_min
+  endif
+  assign on_sale = false
+  if compare_at > price
+    assign on_sale = true
+  endif
+-%}
+
+<div class="price{% if on_sale %} price--sale{% endif %} {{ class }}" data-price>
+  {%- if show_from and product.price_varies -%}
+    <span class="price__from">{{ 'products.product.price_from' | t }}</span>
+  {%- endif -%}
+  <span class="visually-hidden">{% if on_sale %}{{ 'products.product.sale_price' | t }}{% else %}{{ 'products.product.regular_price' | t }}{% endif %}</span>
+  <span class="price__current">{{ price | money }}</span>
+  {%- if on_sale -%}
+    <span class="visually-hidden">{{ 'products.product.regular_price' | t }}</span>
+    <s class="price__compare">{{ compare_at | money }}</s>
+  {%- endif -%}
+  {%- if target.unit_price_measurement -%}
+    <small class="price__unit">
+      {{ target.unit_price | money }}/{% if target.unit_price_measurement.reference_value != 1 %}{{ target.unit_price_measurement.reference_value }}{% endif %}{{ target.unit_price_measurement.reference_unit }}
+    </small>
+  {%- endif -%}
+</div>
+
+{% stylesheet %}
+  .price {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.25rem 0.625rem;
+    letter-spacing: 0.04em;
+  }
+
+  .price__from {
+    font-size: 0.8em;
+    color: var(--color-muted);
+  }
+
+  .price--sale .price__current {
+    color: var(--color-sale);
+  }
+
+  .price__compare {
+    font-size: 0.875em;
+    color: var(--color-muted);
+  }
+
+  .price__unit {
+    flex-basis: 100%;
+    color: var(--color-muted);
+  }
+{% endstylesheet %}

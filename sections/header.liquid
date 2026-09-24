@@ -1,0 +1,728 @@
+{%- liquid
+  assign menu = section.settings.menu
+  assign promos = section.blocks | where: 'type', 'mega_promo'
+-%}
+
+<header-component class="site-header full-width{% if section.settings.sticky %} site-header--sticky{% endif %}">
+  <div class="site-header__top page-width">
+    <div class="site-header__start">
+      <button type="button" class="icon-button site-header__menu-toggle" aria-controls="MenuDrawer" aria-label="{{ 'header.menu' | t }}" data-menu-open>
+        {% render 'icon', name: 'menu' %}
+      </button>
+      {%- if section.settings.show_search -%}
+        <button type="button" class="icon-button" aria-controls="SearchModal" aria-label="{{ 'header.search' | t }}" data-search-open>
+          {% render 'icon', name: 'search' %}
+        </button>
+      {%- endif -%}
+      {%- if section.settings.appointment_label != blank -%}
+        <a class="site-header__utility site-header__utility--desktop" href="{{ section.settings.appointment_link | default: routes.root_url }}">
+          {% render 'icon', name: 'calendar' %}
+          <span>{{ section.settings.appointment_label }}</span>
+        </a>
+      {%- endif -%}
+    </div>
+
+    <div class="site-header__logo">
+      {%- if request.page_type == 'index' -%}<h1 class="site-header__logo-heading">{%- endif -%}
+      <a href="{{ routes.root_url }}" class="site-header__logo-link">
+        {%- if settings.logo -%}
+          {{ settings.logo | image_url: width: 600 | image_tag: class: 'site-header__logo-image', alt: shop.name, widths: '200, 300, 400, 600', sizes: '(min-width: 750px) 200px, 160px' }}
+        {%- else -%}
+          <span class="site-header__logo-text">{{ shop.name }}</span>
+        {%- endif -%}
+      </a>
+      {%- if request.page_type == 'index' -%}</h1>{%- endif -%}
+    </div>
+
+    <div class="site-header__end">
+      {%- if section.settings.show_localization and localization.available_countries.size > 1 -%}
+        <div class="site-header__localization">
+          {% render 'localization-form', id: 'HeaderLocalization' %}
+        </div>
+      {%- endif -%}
+
+      {%- if shop.customer_accounts_enabled -%}
+        <shopify-account class="icon-button site-header__account" menu="{{ section.settings.customer_account_menu }}">
+          {% render 'icon', name: 'account' %}
+          <span class="visually-hidden">{{ 'header.account' | t }}</span>
+        </shopify-account>
+      {%- endif -%}
+
+      <a href="{{ routes.cart_url }}" class="icon-button" data-cart-open aria-label="{{ 'header.cart' | t }}">
+        {% render 'icon', name: 'cart' %}
+        <span class="site-header__cart-count" data-cart-count {% if cart.item_count == 0 %}hidden{% endif %}>{{ cart.item_count }}</span>
+      </a>
+    </div>
+  </div>
+
+  {%- if menu.links.size > 0 -%}
+    <nav class="site-header__nav" aria-label="{{ 'header.main_navigation' | t }}">
+      <ul class="site-nav page-width" role="list">
+        {%- for link in menu.links -%}
+          {%- assign link_handle = link.title | handleize -%}
+          {%- liquid
+            assign link_promos = ''
+            for promo in promos
+              assign promo_handle = promo.settings.menu_item | handleize
+              if promo_handle == link_handle
+                assign link_promos = link_promos | append: promo.id | append: ','
+              endif
+            endfor
+          -%}
+          <li class="site-nav__item{% if link.links.size > 0 %} site-nav__item--mega{% endif %}">
+            <a
+              href="{{ link.url }}"
+              class="site-nav__link{% if link.active or link.child_active %} is-active{% endif %}"
+              {% if link.current %}aria-current="page"{% endif %}
+            >
+              {{- link.title -}}
+            </a>
+            {%- if link.links.size > 0 -%}
+              <div class="mega-menu">
+                <div class="mega-menu__inner page-width">
+                  <div class="mega-menu__columns">
+                    {%- for child in link.links -%}
+                      <div class="mega-menu__column">
+                        <a href="{{ child.url }}" class="mega-menu__heading">{{ child.title }}</a>
+                        {%- if child.links.size > 0 -%}
+                          <ul class="mega-menu__list" role="list">
+                            {%- for grandchild in child.links -%}
+                              <li>
+                                <a href="{{ grandchild.url }}" {% if grandchild.current %}aria-current="page"{% endif %}>{{ grandchild.title }}</a>
+                              </li>
+                            {%- endfor -%}
+                          </ul>
+                        {%- endif -%}
+                      </div>
+                    {%- endfor -%}
+                  </div>
+
+                  {%- if link_promos != '' -%}
+                    <div class="mega-menu__promos">
+                      {%- for promo in promos -%}
+                        {%- assign promo_key = promo.id | append: ',' -%}
+                        {%- if link_promos contains promo_key -%}
+                          <a href="{{ promo.settings.link | default: link.url }}" class="mega-menu__promo" {{ promo.shopify_attributes }}>
+                            <div class="mega-menu__promo-media media">
+                              {%- if promo.settings.image -%}
+                                {{ promo.settings.image | image_url: width: 800 | image_tag: loading: 'lazy', widths: '400, 600, 800', sizes: '320px' }}
+                              {%- else -%}
+                                {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                              {%- endif -%}
+                            </div>
+                            {%- if promo.settings.heading != blank -%}
+                              <span class="mega-menu__promo-heading">{{ promo.settings.heading }}</span>
+                            {%- endif -%}
+                            {%- if promo.settings.button_label != blank -%}
+                              <span class="link">{{ promo.settings.button_label }}</span>
+                            {%- endif -%}
+                          </a>
+                        {%- endif -%}
+                      {%- endfor -%}
+                    </div>
+                  {%- endif -%}
+                </div>
+              </div>
+            {%- endif -%}
+          </li>
+        {%- endfor -%}
+      </ul>
+    </nav>
+  {%- endif -%}
+
+  <dialog id="MenuDrawer" class="drawer drawer--left menu-drawer" aria-label="{{ 'header.menu' | t }}" scroll-lock>
+    <div class="drawer__header">
+      <span class="drawer__title">{{ 'header.menu' | t }}</span>
+      <button type="button" class="icon-button" data-dialog-close aria-label="{{ 'general.close' | t }}">
+        {% render 'icon', name: 'close' %}
+      </button>
+    </div>
+    <nav class="menu-drawer__nav" aria-label="{{ 'header.main_navigation' | t }}">
+      <ul role="list" class="menu-drawer__list">
+        {%- for link in menu.links -%}
+          <li>
+            {%- if link.links.size > 0 -%}
+              <details class="menu-drawer__details">
+                <summary class="menu-drawer__link">
+                  {{ link.title }}
+                  {% render 'icon', name: 'plus' %}
+                </summary>
+                <ul role="list" class="menu-drawer__sublist">
+                  <li><a href="{{ link.url }}" class="menu-drawer__sublink menu-drawer__sublink--all">{{ 'header.view_all' | t: title: link.title }}</a></li>
+                  {%- for child in link.links -%}
+                    <li>
+                      {%- if child.links.size > 0 -%}
+                        <details class="menu-drawer__details">
+                          <summary class="menu-drawer__sublink">
+                            {{ child.title }}
+                            {% render 'icon', name: 'chevron-down' %}
+                          </summary>
+                          <ul role="list" class="menu-drawer__sublist menu-drawer__sublist--nested">
+                            <li><a href="{{ child.url }}" class="menu-drawer__sublink">{{ 'header.view_all' | t: title: child.title }}</a></li>
+                            {%- for grandchild in child.links -%}
+                              <li><a href="{{ grandchild.url }}" class="menu-drawer__sublink">{{ grandchild.title }}</a></li>
+                            {%- endfor -%}
+                          </ul>
+                        </details>
+                      {%- else -%}
+                        <a href="{{ child.url }}" class="menu-drawer__sublink">{{ child.title }}</a>
+                      {%- endif -%}
+                    </li>
+                  {%- endfor -%}
+                </ul>
+              </details>
+            {%- else -%}
+              <a href="{{ link.url }}" class="menu-drawer__link">{{ link.title }}</a>
+            {%- endif -%}
+          </li>
+        {%- endfor -%}
+      </ul>
+    </nav>
+    <div class="menu-drawer__footer">
+      {%- if section.settings.appointment_label != blank -%}
+        <a class="button button--full" href="{{ section.settings.appointment_link | default: routes.root_url }}">
+          {% render 'icon', name: 'calendar' %}
+          {{ section.settings.appointment_label }}
+        </a>
+      {%- endif -%}
+      {%- if section.settings.show_localization and localization.available_countries.size > 1 -%}
+        {% render 'localization-form', id: 'DrawerLocalization' %}
+      {%- endif -%}
+      {% render 'social-icons' %}
+    </div>
+  </dialog>
+
+  {%- if section.settings.show_search -%}
+    <dialog id="SearchModal" class="search-modal" aria-label="{{ 'header.search' | t }}" scroll-lock>
+      <div class="search-modal__inner page-width">
+        <predictive-search class="search-modal__search">
+          <form action="{{ routes.search_url }}" method="get" role="search" class="search-modal__form">
+            {% render 'icon', name: 'search' %}
+            <label class="visually-hidden" for="SearchModalInput">{{ 'header.search' | t }}</label>
+            <input
+              id="SearchModalInput"
+              type="search"
+              name="q"
+              class="search-modal__input"
+              placeholder="{{ 'search.placeholder' | t }}"
+              autocomplete="off"
+              aria-controls="PredictiveSearchResults"
+            >
+            <input type="hidden" name="options[prefix]" value="last">
+            <button type="button" class="icon-button" data-dialog-close aria-label="{{ 'general.close' | t }}">
+              {% render 'icon', name: 'close' %}
+            </button>
+          </form>
+          <div id="PredictiveSearchResults" class="search-modal__results" aria-live="polite"></div>
+        </predictive-search>
+      </div>
+    </dialog>
+  {%- endif -%}
+</header-component>
+
+{% stylesheet %}
+  .shopify-section:has(> .site-header--sticky) {
+    position: sticky;
+    top: 0;
+    z-index: 30;
+  }
+
+  .site-header {
+    display: block;
+    position: relative;
+    background: var(--color-background);
+    border-bottom: 1px solid var(--color-border);
+    transition: box-shadow 0.3s ease;
+  }
+
+  .site-header.is-scrolled {
+    box-shadow: 0 6px 24px rgb(0 0 0 / 0.06);
+  }
+
+  .site-header__top {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 1rem;
+    min-height: 4.5rem;
+  }
+
+  .site-header__start,
+  .site-header__end {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  .site-header__end {
+    justify-content: flex-end;
+  }
+
+  .site-header__utility {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-inline-start: 0.5rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+
+  .site-header__utility:hover {
+    color: var(--color-accent);
+  }
+
+  .site-header__logo {
+    text-align: center;
+  }
+
+  .site-header__logo-heading {
+    font-size: inherit;
+    line-height: 1;
+  }
+
+  .site-header__logo-link {
+    display: inline-block;
+    text-decoration: none;
+  }
+
+  .site-header__logo-image {
+    width: var(--logo-width);
+    height: auto;
+  }
+
+  .site-header__logo-text {
+    font-family: var(--font-heading--family);
+    font-size: 1.75rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+  }
+
+  .site-header__cart-count {
+    position: absolute;
+    top: 0.35rem;
+    right: 0.25rem;
+    display: grid;
+    place-items: center;
+    min-width: 1.1rem;
+    height: 1.1rem;
+    padding-inline: 0.25rem;
+    border-radius: 1rem;
+    background: var(--color-accent);
+    color: #fff;
+    font-size: 0.625rem;
+    line-height: 1;
+  }
+
+  .site-header__cart-count[hidden] {
+    display: none;
+  }
+
+  .site-header__account {
+    cursor: pointer;
+  }
+
+  .site-nav {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0 2rem;
+    list-style: none;
+  }
+
+  .site-nav__link {
+    display: block;
+    padding: 0.875rem 0;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    text-decoration: none;
+    position: relative;
+  }
+
+  .site-nav__link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0.5rem;
+    height: 1px;
+    background: currentcolor;
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+  }
+
+  .site-nav__item:hover > .site-nav__link::after,
+  .site-nav__link.is-active::after {
+    transform: scaleX(1);
+  }
+
+  .mega-menu {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100%;
+    background: var(--color-background);
+    border-top: 1px solid var(--color-border);
+    box-shadow: 0 24px 40px rgb(0 0 0 / 0.06);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-6px);
+    transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+  }
+
+  .site-nav__item--mega:hover > .mega-menu,
+  .site-nav__item--mega:focus-within > .mega-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+  }
+
+  .mega-menu__inner {
+    display: flex;
+    gap: 3rem;
+    padding-block: 2.5rem 3rem;
+  }
+
+  .mega-menu__columns {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr));
+    gap: 2rem;
+  }
+
+  .mega-menu__heading {
+    display: block;
+    margin-block-end: 1rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+
+  .mega-menu__list {
+    display: grid;
+    gap: 0.6rem;
+    padding: 0;
+    list-style: none;
+    font-size: 0.875rem;
+  }
+
+  .mega-menu__list a {
+    color: var(--color-muted);
+    text-decoration: none;
+  }
+
+  .mega-menu__list a:hover,
+  .mega-menu__heading:hover {
+    color: var(--color-accent);
+  }
+
+  .mega-menu__promos {
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  .mega-menu__promo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    width: 20rem;
+    text-decoration: none;
+  }
+
+  .mega-menu__promo-media {
+    aspect-ratio: 4 / 3;
+  }
+
+  .mega-menu__promo-media img {
+    transition: transform 0.8s ease;
+  }
+
+  .mega-menu__promo:hover img {
+    transform: scale(1.04);
+  }
+
+  .mega-menu__promo-heading {
+    font-family: var(--font-heading--family);
+    font-size: 1.25rem;
+  }
+
+  .menu-drawer {
+    display: none;
+    flex-direction: column;
+  }
+
+  .menu-drawer[open] {
+    display: flex;
+  }
+
+  .menu-drawer__nav {
+    flex: 1;
+    overflow-y: auto;
+  }
+
+  .menu-drawer__list,
+  .menu-drawer__sublist {
+    list-style: none;
+    padding: 0;
+  }
+
+  .menu-drawer__list > li {
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .menu-drawer__link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.125rem 1.5rem;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .menu-drawer__link::-webkit-details-marker,
+  .menu-drawer__sublink::-webkit-details-marker {
+    display: none;
+  }
+
+  .menu-drawer__details[open] > summary .icon--plus {
+    transform: rotate(45deg);
+  }
+
+  .menu-drawer__details[open] > summary .icon--chevron-down {
+    transform: rotate(180deg);
+  }
+
+  .menu-drawer__details summary .icon {
+    transition: transform 0.25s ease;
+  }
+
+  .menu-drawer__sublist {
+    padding-block-end: 1rem;
+  }
+
+  .menu-drawer__sublist--nested {
+    padding-inline-start: 1rem;
+  }
+
+  .menu-drawer__sublink {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.625rem 1.5rem;
+    font-size: 0.9375rem;
+    color: var(--color-muted);
+    text-decoration: none;
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .menu-drawer__sublink--all {
+    color: var(--color-foreground);
+    text-decoration: underline;
+    text-underline-offset: 0.3em;
+  }
+
+  .menu-drawer__footer {
+    display: grid;
+    gap: 1.25rem;
+    padding: 1.5rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .search-modal {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    max-height: 85vh;
+    box-shadow: 0 20px 50px rgb(0 0 0 / 0.1);
+  }
+
+  .search-modal[open] {
+    animation: search-in 0.3s ease;
+  }
+
+  .search-modal::backdrop {
+    background: rgb(15 23 41 / 0.45);
+  }
+
+  @keyframes search-in {
+    from {
+      transform: translateY(-100%);
+    }
+  }
+
+  .search-modal__inner {
+    padding-block: 1.25rem 2rem;
+  }
+
+  .search-modal__form {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    border-bottom: 1px solid var(--color-foreground);
+  }
+
+  .search-modal__input {
+    flex: 1;
+    min-height: 3.5rem;
+    border: 0;
+    background: transparent;
+    font-size: 1.125rem;
+  }
+
+  .search-modal__input:focus {
+    outline: none;
+  }
+
+  .search-modal__input::-webkit-search-cancel-button {
+    display: none;
+  }
+
+  @media (max-width: 989px) {
+    .site-header__nav,
+    .site-header__utility--desktop,
+    .site-header__localization {
+      display: none;
+    }
+
+    .site-header__top {
+      min-height: 3.75rem;
+    }
+
+    .site-header__logo-text {
+      font-size: 1.25rem;
+    }
+
+    .site-header__logo-image {
+      width: calc(var(--logo-width) * 0.75);
+    }
+  }
+
+  @media (min-width: 990px) {
+    .site-header__menu-toggle {
+      display: none;
+    }
+  }
+{% endstylesheet %}
+
+{% javascript %}
+  class HeaderComponent extends HTMLElement {
+    connectedCallback() {
+      this.querySelector('[data-menu-open]')?.addEventListener('click', () => {
+        document.getElementById('MenuDrawer')?.showModal();
+      });
+
+      this.querySelector('[data-search-open]')?.addEventListener('click', () => {
+        const modal = document.getElementById('SearchModal');
+        if (!modal) return;
+        modal.showModal();
+        modal.querySelector('input[type="search"]')?.focus();
+      });
+
+      const searchModal = this.querySelector('#SearchModal');
+      searchModal?.addEventListener('click', (event) => {
+        if (event.target === searchModal) searchModal.close();
+      });
+
+      const menuDrawer = this.querySelector('#MenuDrawer');
+      menuDrawer?.addEventListener('click', (event) => {
+        if (event.target === menuDrawer) menuDrawer.close();
+      });
+
+      this.onScroll = () => this.classList.toggle('is-scrolled', window.scrollY > 10);
+      window.addEventListener('scroll', this.onScroll, { passive: true });
+      this.onScroll();
+    }
+
+    disconnectedCallback() {
+      window.removeEventListener('scroll', this.onScroll);
+    }
+  }
+
+  if (!customElements.get('header-component')) customElements.define('header-component', HeaderComponent);
+
+  class PredictiveSearch extends HTMLElement {
+    connectedCallback() {
+      this.input = this.querySelector('input[type="search"]');
+      this.results = this.querySelector('.search-modal__results');
+      this.controller = null;
+      this.timer = null;
+      this.input?.addEventListener('input', () => {
+        clearTimeout(this.timer);
+        this.timer = setTimeout(() => this.search(this.input.value.trim()), 250);
+      });
+    }
+
+    async search(term) {
+      if (!term) {
+        this.results.innerHTML = '';
+        return;
+      }
+      this.controller?.abort();
+      this.controller = new AbortController();
+      const root = window.theme?.routes?.root || '/';
+      const params = new URLSearchParams({
+        q: term,
+        'resources[type]': 'product,collection,page,article',
+        'resources[limit]': '6',
+        'resources[options][fields]': 'title,product_type,variants.title,vendor,tag',
+        section_id: 'predictive-search'
+      });
+      try {
+        const response = await fetch(`${root}search/suggest?${params}`, { signal: this.controller.signal });
+        if (!response.ok) return;
+        const html = await response.text();
+        const doc = new DOMParser().parseFromString(html, 'text/html');
+        const content = doc.querySelector('#PredictiveSearchContent');
+        this.results.innerHTML = content ? content.innerHTML : '';
+      } catch (error) {
+        if (error.name !== 'AbortError') this.results.innerHTML = '';
+      }
+    }
+  }
+
+  if (!customElements.get('predictive-search')) customElements.define('predictive-search', PredictiveSearch);
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Cabeçalho",
+  "class": "section-header",
+  "settings": [
+    { "type": "link_list", "id": "menu", "label": "Menu principal", "default": "main-menu", "info": "Até 3 níveis. O 2º nível vira coluna do mega menu e o 3º nível, a lista de links." },
+    { "type": "link_list", "id": "customer_account_menu", "label": "Menu da conta do cliente", "default": "customer-account-main-menu" },
+    { "type": "checkbox", "id": "sticky", "label": "Cabeçalho fixo ao rolar", "default": true },
+    { "type": "checkbox", "id": "show_search", "label": "Mostrar busca", "default": true },
+    { "type": "checkbox", "id": "show_localization", "label": "Mostrar seletor de país/moeda", "default": true },
+    { "type": "header", "content": "Link de agendamento" },
+    { "type": "text", "id": "appointment_label", "label": "Texto", "default": "Agende uma visita" },
+    { "type": "url", "id": "appointment_link", "label": "Link" }
+  ],
+  "blocks": [
+    {
+      "type": "mega_promo",
+      "name": "Imagem do mega menu",
+      "settings": [
+        { "type": "text", "id": "menu_item", "label": "Item do menu", "info": "Digite o nome exato do item do menu principal (ex.: Anéis de noivado)." },
+        { "type": "image_picker", "id": "image", "label": "Imagem" },
+        { "type": "text", "id": "heading", "label": "Título", "default": "Pronta entrega" },
+        { "type": "text", "id": "button_label", "label": "Texto do link", "default": "Comprar agora" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "enabled_on": { "groups": ["header"] }
+}
+{% endschema %}

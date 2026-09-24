@@ -1,0 +1,86 @@
+<div class="collections-list page-width section-spacing">
+  <div class="section-header">
+    <h1>{{ 'collections.title' | t }}</h1>
+  </div>
+  {%- paginate collections by 24 -%}
+    <ul class="collections-list__grid" role="list">
+      {%- for collection in collections -%}
+        <li>
+          <a href="{{ collection.url }}" class="collection-card">
+            <span class="collection-card__media media">
+              {%- if collection.featured_image -%}
+                {{ collection.featured_image | image_url: width: 1000 | image_tag: loading: 'lazy', widths: '400, 600, 800, 1000', sizes: '(min-width: 990px) 33vw, 50vw' }}
+              {%- else -%}
+                {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
+              {%- endif -%}
+            </span>
+            <span class="collection-card__title">{{ collection.title }}</span>
+            <span class="collection-card__count">{{ 'collections.product_count' | t: count: collection.products_count }}</span>
+          </a>
+        </li>
+      {%- endfor -%}
+    </ul>
+    {%- if paginate.pages > 1 -%}
+      {% render 'pagination', paginate: paginate %}
+    {%- endif -%}
+  {%- endpaginate -%}
+</div>
+
+{% stylesheet %}
+  .collections-list__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2.5rem 1.5rem;
+    padding: 0;
+    list-style: none;
+  }
+
+  .collection-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    text-align: center;
+  }
+
+  .collection-card__media {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    margin-block-end: 0.75rem;
+  }
+
+  .collection-card__media img {
+    transition: transform 1s ease;
+  }
+
+  .collection-card:hover img {
+    transform: scale(1.04);
+  }
+
+  .collection-card__title {
+    font-family: var(--font-heading--family);
+    font-size: 1.375rem;
+  }
+
+  .collection-card__count {
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
+
+  @media (max-width: 749px) {
+    .collections-list__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 2rem 1rem;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Lista de coleções",
+  "settings": []
+}
+{% endschema %}

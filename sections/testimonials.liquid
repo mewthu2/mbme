@@ -1,0 +1,146 @@
+<section
+  class="testimonials full-width section-spacing color-scheme--{{ section.settings.color_scheme }}"
+  style="--section-padding-top: {{ section.settings.padding_top }}px; --section-padding-bottom: {{ section.settings.padding_bottom }}px;"
+>
+  <scroll-slider class="page-width testimonials__inner">
+    <div class="section-header">
+      {%- if section.settings.eyebrow != blank -%}<span class="eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+      {%- if section.settings.heading != blank -%}<h2>{{ section.settings.heading }}</h2>{%- endif -%}
+      {%- if section.settings.text != blank -%}<div>{{ section.settings.text }}</div>{%- endif -%}
+    </div>
+    <ul class="testimonials__list scroll-track" role="list" data-slider-track>
+      {%- for block in section.blocks -%}
+        <li class="testimonial" {{ block.shopify_attributes }}>
+          <div class="testimonial__stars" aria-label="{{ 'general.rating' | t: rating: block.settings.rating }}">
+            {%- for i in (1..block.settings.rating) -%}{% render 'icon', name: 'star' %}{%- endfor -%}
+          </div>
+          <blockquote class="testimonial__quote">{{ block.settings.quote }}</blockquote>
+          <p class="testimonial__author">{{ block.settings.author }}</p>
+        </li>
+      {%- endfor -%}
+    </ul>
+    <div class="slider-controls testimonials__controls">
+      <button type="button" class="slider-button" data-slider-prev aria-label="{{ 'general.previous' | t }}">{% render 'icon', name: 'chevron-left' %}</button>
+      <button type="button" class="slider-button" data-slider-next aria-label="{{ 'general.next' | t }}">{% render 'icon', name: 'chevron-right' %}</button>
+    </div>
+  </scroll-slider>
+</section>
+
+{% stylesheet %}
+  .testimonials__inner {
+    display: block;
+  }
+
+  .testimonials__list {
+    --track-item-width: calc((100% - 3rem) / 3);
+    --track-gap: 1.5rem;
+    padding: 0;
+    list-style: none;
+  }
+
+  .testimonial {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    padding: 2.5rem 2rem;
+    background: var(--color-background);
+    border: 1px solid var(--color-border);
+    text-align: center;
+    align-items: center;
+  }
+
+  .color-scheme--dark .testimonial {
+    background: transparent;
+  }
+
+  .testimonial__stars {
+    display: flex;
+    gap: 0.2rem;
+    color: var(--color-accent);
+  }
+
+  .testimonial__stars .icon {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .testimonial__quote {
+    font-family: var(--font-heading--family);
+    font-size: 1.125rem;
+    font-style: italic;
+    line-height: 1.6;
+  }
+
+  .testimonial__author {
+    font-size: 0.75rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
+
+  .testimonials__controls {
+    justify-content: center;
+    margin-block-start: 2rem;
+  }
+
+  @media (max-width: 989px) {
+    .testimonials__list {
+      --track-item-width: 48%;
+    }
+  }
+
+  @media (max-width: 749px) {
+    .testimonials__list {
+      --track-item-width: 85%;
+      --track-gap: 1rem;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Depoimentos",
+  "class": "section-testimonials",
+  "max_blocks": 12,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Sobretítulo", "default": "Avaliações" },
+    { "type": "text", "id": "heading", "label": "Título", "default": "O que nossos clientes dizem" },
+    { "type": "richtext", "id": "text", "label": "Texto" },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Fundo",
+      "options": [
+        { "value": "default", "label": "Padrão" },
+        { "value": "surface", "label": "Claro" },
+        { "value": "dark", "label": "Escuro" }
+      ],
+      "default": "surface"
+    },
+    { "type": "range", "id": "padding_top", "label": "Espaço superior", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 80 },
+    { "type": "range", "id": "padding_bottom", "label": "Espaço inferior", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 80 }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Depoimento",
+      "settings": [
+        { "type": "range", "id": "rating", "label": "Estrelas", "min": 1, "max": 5, "step": 1, "default": 5 },
+        { "type": "textarea", "id": "quote", "label": "Depoimento", "default": "Atendimento impecável do início ao fim. O anel ficou ainda mais bonito do que imaginávamos." },
+        { "type": "text", "id": "author", "label": "Autor", "default": "Mariana S." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Depoimentos",
+      "blocks": [
+        { "type": "testimonial" },
+        { "type": "testimonial", "settings": { "quote": "Recebi o certificado do diamante e toda a orientação para escolher a pedra ideal. Recomendo muito!", "author": "Rafael T." } },
+        { "type": "testimonial", "settings": { "quote": "Qualidade excepcional e entrega super segura. Minha noiva amou!", "author": "Lucas M." } },
+        { "type": "testimonial", "settings": { "quote": "A experiência no showroom foi incrível. Me senti muito bem atendida.", "author": "Camila R." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

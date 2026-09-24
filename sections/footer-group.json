@@ -1,0 +1,43 @@
+{
+  "type": "footer",
+  "name": "Rodapé",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "settings": {},
+      "blocks": {
+        "brand_1": {
+          "type": "brand",
+          "settings": {}
+        },
+        "menu_2": {
+          "type": "menu",
+          "settings": {
+            "heading": "Atendimento",
+            "menu": "footer"
+          }
+        },
+        "menu_3": {
+          "type": "menu",
+          "settings": {
+            "heading": "Sobre nós",
+            "menu": "main-menu"
+          }
+        },
+        "newsletter_4": {
+          "type": "newsletter",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "brand_1",
+        "menu_2",
+        "menu_3",
+        "newsletter_4"
+      ]
+    }
+  },
+  "order": [
+    "footer"
+  ]
+}

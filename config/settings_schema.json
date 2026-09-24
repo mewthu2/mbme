@@ -1,0 +1,120 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Lumière",
+    "theme_version": "1.0.0",
+    "theme_author": "mbme",
+    "theme_documentation_url": "https://help.shopify.com/manual/online-store/themes",
+    "theme_support_url": "https://support.shopify.com/"
+  },
+  {
+    "name": "Logo",
+    "settings": [
+      { "type": "image_picker", "id": "logo", "label": "Logo" },
+      { "type": "image_picker", "id": "logo_inverse", "label": "Logo (versão clara, para fundos escuros)" },
+      { "type": "range", "id": "logo_width", "label": "Largura do logo", "min": 60, "max": 300, "step": 5, "unit": "px", "default": 160 },
+      { "type": "image_picker", "id": "favicon", "label": "Favicon", "info": "32 x 32px .png recomendado" }
+    ]
+  },
+  {
+    "name": "Cores",
+    "settings": [
+      { "type": "color", "id": "background_color", "label": "Fundo", "default": "#FFFFFF" },
+      { "type": "color", "id": "foreground_color", "label": "Texto", "default": "#1B1B1F" },
+      { "type": "color", "id": "muted_color", "label": "Texto secundário", "default": "#6B6B73" },
+      { "type": "color", "id": "surface_color", "label": "Fundo alternativo (seções claras)", "default": "#F7F4EF" },
+      { "type": "color", "id": "dark_color", "label": "Fundo escuro (barra de anúncios, rodapé)", "default": "#0F1729" },
+      { "type": "color", "id": "accent_color", "label": "Destaque (dourado)", "default": "#B08D57" },
+      { "type": "color", "id": "border_color", "label": "Bordas", "default": "#E6E1D8" },
+      { "type": "color", "id": "sale_color", "label": "Preço promocional", "default": "#A4343A" },
+      { "type": "header", "content": "Botões" },
+      { "type": "color", "id": "button_background", "label": "Fundo do botão principal", "default": "#0F1729" },
+      { "type": "color", "id": "button_text", "label": "Texto do botão principal", "default": "#FFFFFF" },
+      { "type": "range", "id": "button_radius", "label": "Arredondamento dos botões", "min": 0, "max": 30, "step": 1, "unit": "px", "default": 0 },
+      { "type": "range", "id": "input_corner_radius", "label": "Arredondamento dos campos", "min": 0, "max": 10, "step": 1, "unit": "px", "default": 0 }
+    ]
+  },
+  {
+    "name": "Tipografia",
+    "settings": [
+      { "type": "font_picker", "id": "type_heading_font", "label": "Fonte dos títulos", "default": "playfair_display_n4" },
+      { "type": "font_picker", "id": "type_primary_font", "label": "Fonte do texto", "default": "montserrat_n4" },
+      { "type": "range", "id": "heading_scale", "label": "Escala dos títulos", "min": 80, "max": 130, "step": 5, "unit": "%", "default": 100 },
+      { "type": "range", "id": "body_scale", "label": "Escala do texto", "min": 80, "max": 120, "step": 5, "unit": "%", "default": 100 },
+      { "type": "checkbox", "id": "uppercase_headings", "label": "Títulos em maiúsculas", "default": false }
+    ]
+  },
+  {
+    "name": "Layout",
+    "settings": [
+      {
+        "type": "select",
+        "id": "max_page_width",
+        "label": "Largura da página",
+        "options": [
+          { "value": "90rem", "label": "Estreita" },
+          { "value": "110rem", "label": "Larga" }
+        ],
+        "default": "90rem"
+      },
+      { "type": "range", "id": "min_page_margin", "min": 10, "max": 100, "step": 1, "unit": "px", "label": "Margem lateral", "default": 24 }
+    ]
+  },
+  {
+    "name": "Cartões de produto",
+    "settings": [
+      {
+        "type": "select",
+        "id": "card_image_ratio",
+        "label": "Proporção da imagem",
+        "options": [
+          { "value": "1 / 1", "label": "Quadrada" },
+          { "value": "4 / 5", "label": "Retrato" },
+          { "value": "3 / 4", "label": "Retrato alto" }
+        ],
+        "default": "1 / 1"
+      },
+      { "type": "checkbox", "id": "card_show_second_image", "label": "Mostrar segunda imagem ao passar o mouse", "default": true },
+      { "type": "checkbox", "id": "card_show_sale_badge", "label": "Mostrar selo de desconto", "default": true },
+      { "type": "checkbox", "id": "card_show_vendor", "label": "Mostrar marca", "default": false },
+      { "type": "color", "id": "card_image_background", "label": "Fundo da imagem", "default": "#F5F5F5" }
+    ]
+  },
+  {
+    "name": "Carrinho",
+    "settings": [
+      {
+        "type": "select",
+        "id": "cart_type",
+        "label": "Tipo de carrinho",
+        "options": [
+          { "value": "drawer", "label": "Gaveta lateral" },
+          { "value": "page", "label": "Página" }
+        ],
+        "default": "drawer"
+      },
+      { "type": "checkbox", "id": "cart_show_note", "label": "Permitir observação no pedido", "default": true },
+      { "type": "text", "id": "cart_free_shipping_text", "label": "Mensagem no carrinho", "default": "Frete grátis e seguro para todo o Brasil" }
+    ]
+  },
+  {
+    "name": "Redes sociais",
+    "settings": [
+      { "type": "text", "id": "social_instagram_link", "label": "Instagram", "info": "https://instagram.com/sualoja" },
+      { "type": "text", "id": "social_facebook_link", "label": "Facebook" },
+      { "type": "text", "id": "social_pinterest_link", "label": "Pinterest" },
+      { "type": "text", "id": "social_tiktok_link", "label": "TikTok" },
+      { "type": "text", "id": "social_youtube_link", "label": "YouTube" },
+      { "type": "text", "id": "social_twitter_link", "label": "X (Twitter)" },
+      { "type": "text", "id": "social_linkedin_link", "label": "LinkedIn" }
+    ]
+  },
+  {
+    "name": "WhatsApp",
+    "settings": [
+      { "type": "checkbox", "id": "whatsapp_enable", "label": "Mostrar botão flutuante do WhatsApp", "default": false },
+      { "type": "text", "id": "whatsapp_number", "label": "Número (com DDI e DDD)", "info": "Ex.: 5511999999999" },
+      { "type": "text", "id": "whatsapp_message", "label": "Mensagem inicial", "default": "Olá! Gostaria de ajuda para escolher uma joia." }
+    ]
+  }
+]

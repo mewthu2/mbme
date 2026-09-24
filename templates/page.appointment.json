@@ -1,0 +1,53 @@
+{
+  "sections": {
+    "form": {
+      "type": "contact-form",
+      "settings": {
+        "appointment_mode": true,
+        "eyebrow": "Showroom",
+        "heading": "Agende uma visita",
+        "text": "<p>Escolha o melhor dia e horário. Um especialista confirmará seu agendamento por e-mail ou telefone.</p>",
+        "locations": "São Paulo – Jardins\nRio de Janeiro – Leblon\nAtendimento virtual"
+      }
+    },
+    "features": {
+      "type": "features",
+      "settings": {},
+      "blocks": {
+        "feature_1": {
+          "type": "feature",
+          "settings": {
+            "icon": "diamond",
+            "title": "Veja de perto",
+            "text": "<p>Compare diamantes e montagens lado a lado.</p>"
+          }
+        },
+        "feature_2": {
+          "type": "feature",
+          "settings": {
+            "icon": "chat",
+            "title": "Especialistas",
+            "text": "<p>Orientação personalizada, sem compromisso.</p>"
+          }
+        },
+        "feature_3": {
+          "type": "feature",
+          "settings": {
+            "icon": "calendar",
+            "title": "Horário reservado",
+            "text": "<p>Atendimento exclusivo no horário escolhido.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "feature_1",
+        "feature_2",
+        "feature_3"
+      ]
+    }
+  },
+  "order": [
+    "form",
+    "features"
+  ]
+}

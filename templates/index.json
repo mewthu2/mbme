@@ -1,0 +1,290 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {}
+    },
+    "features": {
+      "type": "features",
+      "settings": {},
+      "blocks": {
+        "feature_1": {
+          "type": "feature",
+          "settings": {
+            "icon": "hand",
+            "title": "Design artesanal",
+            "text": "<p>Cada peça é criada por nossos ourives com precisão e cuidado.</p>"
+          }
+        },
+        "feature_2": {
+          "type": "feature",
+          "settings": {
+            "icon": "chat",
+            "title": "Consultoria especializada",
+            "text": "<p>Especialistas prontos para ajudar você a escolher a peça perfeita.</p>"
+          }
+        },
+        "feature_3": {
+          "type": "feature",
+          "settings": {
+            "icon": "return",
+            "title": "Trocas e ajuste de aro",
+            "text": "<p>Trocas fáceis em até 30 dias e primeiro ajuste de aro gratuito.</p>"
+          }
+        },
+        "feature_4": {
+          "type": "feature",
+          "settings": {
+            "icon": "leaf",
+            "title": "Origem responsável",
+            "text": "<p>Diamantes certificados e rastreáveis, livres de conflito.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "feature_1",
+        "feature_2",
+        "feature_3",
+        "feature_4"
+      ]
+    },
+    "signature": {
+      "type": "featured-collection",
+      "settings": {}
+    },
+    "shapes": {
+      "type": "shop-by-shape",
+      "settings": {},
+      "blocks": {
+        "shape_1": {
+          "type": "shape",
+          "settings": {
+            "label": "Redondo"
+          }
+        },
+        "shape_2": {
+          "type": "shape",
+          "settings": {
+            "label": "Oval"
+          }
+        },
+        "shape_3": {
+          "type": "shape",
+          "settings": {
+            "label": "Princesa"
+          }
+        },
+        "shape_4": {
+          "type": "shape",
+          "settings": {
+            "label": "Esmeralda"
+          }
+        },
+        "shape_5": {
+          "type": "shape",
+          "settings": {
+            "label": "Pera"
+          }
+        },
+        "shape_6": {
+          "type": "shape",
+          "settings": {
+            "label": "Coração"
+          }
+        },
+        "shape_7": {
+          "type": "shape",
+          "settings": {
+            "label": "Almofada"
+          }
+        },
+        "shape_8": {
+          "type": "shape",
+          "settings": {
+            "label": "Marquise"
+          }
+        }
+      },
+      "block_order": [
+        "shape_1",
+        "shape_2",
+        "shape_3",
+        "shape_4",
+        "shape_5",
+        "shape_6",
+        "shape_7",
+        "shape_8"
+      ]
+    },
+    "categories": {
+      "type": "category-tiles",
+      "settings": {},
+      "blocks": {
+        "tile_1": {
+          "type": "tile",
+          "settings": {
+            "title": "Diamantes",
+            "text": "<p>Explore a maior seleção de diamantes certificados, escolhidos um a um.</p>",
+            "button_label_1": "Comprar diamantes",
+            "button_label_2": "Saiba mais"
+          }
+        },
+        "tile_2": {
+          "type": "tile",
+          "settings": {
+            "title": "Pedras preciosas",
+            "text": "<p>As cores mais vibrantes da natureza: safiras, esmeraldas e rubis.</p>",
+            "button_label_1": "Comprar pedras",
+            "button_label_2": "Saiba mais"
+          }
+        },
+        "tile_3": {
+          "type": "tile",
+          "settings": {
+            "title": "Diamantes de laboratório",
+            "text": "<p>Brilho, simetria e pureza excepcionais, com consciência.</p>",
+            "button_label_1": "Comprar",
+            "button_label_2": "Saiba mais"
+          }
+        },
+        "tile_4": {
+          "type": "tile",
+          "settings": {
+            "title": "Diamantes naturais",
+            "text": "<p>Os diamantes naturais do mais alto calibre, com lapidação ideal.</p>",
+            "button_label_1": "Comprar",
+            "button_label_2": "Saiba mais"
+          }
+        }
+      },
+      "block_order": [
+        "tile_1",
+        "tile_2",
+        "tile_3",
+        "tile_4"
+      ]
+    },
+    "bespoke": {
+      "type": "image-with-text",
+      "settings": {
+        "layout": "image-left",
+        "eyebrow": "Sob medida",
+        "heading": "Uma joia só sua",
+        "button_label_1": "Criar sob medida"
+      }
+    },
+    "press": {
+      "type": "logo-list",
+      "settings": {},
+      "blocks": {
+        "logo_1": {
+          "type": "logo",
+          "settings": {
+            "name": "Vogue"
+          }
+        },
+        "logo_2": {
+          "type": "logo",
+          "settings": {
+            "name": "Forbes"
+          }
+        },
+        "logo_3": {
+          "type": "logo",
+          "settings": {
+            "name": "Elle"
+          }
+        },
+        "logo_4": {
+          "type": "logo",
+          "settings": {
+            "name": "Marie Claire"
+          }
+        },
+        "logo_5": {
+          "type": "logo",
+          "settings": {
+            "name": "Harper's Bazaar"
+          }
+        }
+      },
+      "block_order": [
+        "logo_1",
+        "logo_2",
+        "logo_3",
+        "logo_4",
+        "logo_5"
+      ]
+    },
+    "reviews": {
+      "type": "testimonials",
+      "settings": {},
+      "blocks": {
+        "testimonial_1": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Atendimento impecável do início ao fim. O anel ficou ainda mais bonito do que imaginávamos.",
+            "author": "Mariana S."
+          }
+        },
+        "testimonial_2": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Recebi o certificado do diamante e toda a orientação para escolher a pedra ideal. Recomendo muito!",
+            "author": "Rafael T."
+          }
+        },
+        "testimonial_3": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Qualidade excepcional e entrega super segura. Minha noiva amou!",
+            "author": "Lucas M."
+          }
+        },
+        "testimonial_4": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "A experiência no showroom foi incrível. Me senti muito bem atendida.",
+            "author": "Camila R."
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_1",
+        "testimonial_2",
+        "testimonial_3",
+        "testimonial_4"
+      ]
+    },
+    "showroom": {
+      "type": "image-with-text",
+      "settings": {
+        "layout": "overlay",
+        "color_scheme": "dark",
+        "eyebrow": "Showrooms",
+        "heading": "Visite nosso showroom",
+        "text": "<p>Descubra nossas joias pessoalmente, com a orientação de um especialista, em um ambiente exclusivo e reservado.</p>",
+        "button_label_1": "Agendar visita",
+        "button_label_2": "Conheça nossos showrooms"
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "color_scheme": "surface"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "features",
+    "signature",
+    "shapes",
+    "categories",
+    "bespoke",
+    "press",
+    "reviews",
+    "showroom",
+    "newsletter"
+  ]
+}

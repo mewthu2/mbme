@@ -1,0 +1,87 @@
+{% doc %}
+  Renders an inline SVG icon.
+
+  @param {string} name - Icon name (account, cart, search, menu, close, chevron-down, chevron-left, chevron-right, arrow-right, calendar, heart, diamond, truck, return, shield, ring, hand, leaf, certificate, chat, pin, phone, mail, plus, minus, star, check, filter, facebook, instagram, pinterest, tiktok, youtube, twitter, linkedin, whatsapp)
+  @param {string} [class] - Extra CSS class
+
+  @example
+  {% render 'icon', name: 'cart' %}
+{% enddoc %}
+
+{%- capture attrs -%}class="icon icon--{{ name }} {{ class }}" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"{%- endcapture -%}
+{%- capture stroke -%}fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"{%- endcapture -%}
+
+{%- case name -%}
+  {%- when 'account' -%}
+    <svg {{ attrs }} {{ stroke }}><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg>
+  {%- when 'cart' -%}
+    <svg {{ attrs }} {{ stroke }}><path d="M5 8h14l-1.2 12.1a1 1 0 0 1-1 .9H7.2a1 1 0 0 1-1-.9L5 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+  {%- when 'search' -%}
+    <svg {{ attrs }} {{ stroke }}><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+  {%- when 'menu' -%}
+    <svg {{ attrs }} {{ stroke }}><path d="M3 7h18M3 12h18M3 17h18"/></svg>
+  {%- when 'close' -%}
+    <svg {{ attrs }} {{ stroke }}><path d="M6 6l12 12M18 6 6 18"/></svg>
+  {%- when 'chevron-down' -%}
+    <svg {{ attrs }} {{ stroke }}><path d="m6 9 6 6 6-6"/></svg>
+  {%- when 'chevron-left' -%}
+    <svg {{ attrs }} {{ stroke }}><path d="m15 6-6 6 6 6"/></svg>
+  {%- when 'chevron-right' -%}
+    <svg {{ attrs }} {{ stroke }}><path d="m9 6 6 6-6 6"/></svg>
+  {%- when 'arrow-right' -%}
+    <svg {{ attrs }} {{ stroke }}><path d="M4 12h16M14 6l6 6-6 6"/></svg>
+  {%- when 'calendar' -%}
+    <svg {{ attrs }} {{ stroke }}><rect x="3.5" y="5" width="17" height="15.5" rx="1"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>
+  {%- when 'heart' -%}
+    <svg {{ attrs }} {{ stroke }}><path d="M12 20s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.2a4.3 4.3 0 0 1 7.5 2.6C19.5 15.4 12 20 12 20Z"/></svg>
+  {%- when 'diamond' -%}
+    <svg {{ attrs }} {{ stroke }}><path d="M6.5 4h11L21 9l-9 11L3 9l3.5-5Z"/><path d="M3 9h18M9.5 4 8 9l4 11 4-11-1.5-5"/></svg>
+  {%- when 'truck' -%}
+    <svg {{ attrs }} {{ stroke }}><path d="M2.5 6h11v10h-11zM13.5 9.5h4l3 3.5V16h-7"/><circle cx="6.5" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg>
+  {%- when 'return' -%}
+    <svg {{ attrs }} {{ stroke }}><path d="M4 9h11a5 5 0 0 1 0 10H8"/><path d="m8 5-4 4 4 4"/></svg>
+  {%- when 'shield' -%}
+    <svg {{ attrs }} {{ stroke }}><path d="M12 3 4.5 6v5.5c0 4.6 3.2 8.2 7.5 9.5 4.3-1.3 7.5-4.9 7.5-9.5V6L12 3Z"/><path d="m8.8 12 2.2 2.2 4.2-4.4"/></svg>
+  {%- when 'ring' -%}
+    <svg {{ attrs }} {{ stroke }}><circle cx="12" cy="15" r="6"/><path d="M9.5 9.6 8 6.5 10 3.5h4l2 3-1.5 3.1M8 6.5h8"/></svg>
+  {%- when 'hand' -%}
+    <svg {{ attrs }} {{ stroke }}><path d="M8 12V5.5a1.5 1.5 0 0 1 3 0V11M11 10V4.5a1.5 1.5 0 0 1 3 0V11M14 10.5V6a1.5 1.5 0 0 1 3 0v7.5c0 4-2.5 7-6.5 7-2.6 0-4.2-1.4-5.5-3.6L3.4 14a1.5 1.5 0 0 1 2.6-1.5L8 15"/></svg>
+  {%- when 'leaf' -%}
+    <svg {{ attrs }} {{ stroke }}><path d="M5 19C5 10 10 5 20 4c-.5 10-5.5 15-15 15Z"/><path d="M5 19 13 11"/></svg>
+  {%- when 'certificate' -%}
+    <svg {{ attrs }} {{ stroke }}><rect x="3.5" y="3.5" width="17" height="12" rx="1"/><path d="M7.5 7.5h9M7.5 11h5"/><circle cx="16" cy="16.5" r="2.5"/><path d="m14.5 18.5-1 3 2.5-1 2.5 1-1-3"/></svg>
+  {%- when 'chat' -%}
+    <svg {{ attrs }} {{ stroke }}><path d="M4 5h16v11H9l-5 4V5Z"/><path d="M8 9.5h8M8 12.5h5"/></svg>
+  {%- when 'pin' -%}
+    <svg {{ attrs }} {{ stroke }}><path d="M12 21s-6.5-6.1-6.5-11a6.5 6.5 0 0 1 13 0c0 4.9-6.5 11-6.5 11Z"/><circle cx="12" cy="10" r="2.3"/></svg>
+  {%- when 'phone' -%}
+    <svg {{ attrs }} {{ stroke }}><path d="M5 4h3.5l1.5 4-2 1.5a11 11 0 0 0 6.5 6.5L16 14l4 1.5V19a1 1 0 0 1-1 1A15 15 0 0 1 4 5a1 1 0 0 1 1-1Z"/></svg>
+  {%- when 'mail' -%}
+    <svg {{ attrs }} {{ stroke }}><rect x="3" y="5.5" width="18" height="13" rx="1"/><path d="m3.5 6.5 8.5 7 8.5-7"/></svg>
+  {%- when 'plus' -%}
+    <svg {{ attrs }} {{ stroke }}><path d="M12 5v14M5 12h14"/></svg>
+  {%- when 'minus' -%}
+    <svg {{ attrs }} {{ stroke }}><path d="M5 12h14"/></svg>
+  {%- when 'check' -%}
+    <svg {{ attrs }} {{ stroke }}><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>
+  {%- when 'filter' -%}
+    <svg {{ attrs }} {{ stroke }}><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/></svg>
+  {%- when 'star' -%}
+    <svg {{ attrs }} fill="currentColor"><path d="m12 3 2.7 5.6 6.1.8-4.5 4.2 1.1 6.1L12 16.8l-5.4 2.9 1.1-6.1-4.5-4.2 6.1-.8L12 3Z"/></svg>
+  {%- when 'facebook' -%}
+    <svg {{ attrs }} fill="currentColor"><path d="M13.5 21v-7.5h2.6l.4-3h-3V8.6c0-.9.3-1.5 1.5-1.5h1.6V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.8 1.4-3.8 3.9v2.3H8v3h2.5V21h3Z"/></svg>
+  {%- when 'instagram' -%}
+    <svg {{ attrs }} {{ stroke }}><rect x="3.5" y="3.5" width="17" height="17" rx="4.5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r=".6" fill="currentColor"/></svg>
+  {%- when 'pinterest' -%}
+    <svg {{ attrs }} fill="currentColor"><path d="M12 3a9 9 0 0 0-3.3 17.4c-.1-.7-.1-1.8 0-2.6l1.1-4.6s-.3-.6-.3-1.4c0-1.3.8-2.3 1.7-2.3.8 0 1.2.6 1.2 1.3 0 .8-.5 2-.8 3.1-.2.9.5 1.7 1.4 1.7 1.7 0 3-1.8 3-4.4 0-2.3-1.6-3.9-4-3.9-2.7 0-4.3 2-4.3 4.2 0 .8.3 1.7.7 2.2l.1.3-.3 1.1c0 .2-.2.2-.4.1-1.2-.6-2-2.3-2-3.8 0-3.1 2.3-6 6.5-6 3.4 0 6.1 2.4 6.1 5.7 0 3.4-2.1 6.1-5.1 6.1-1 0-1.9-.5-2.2-1.1l-.6 2.3c-.2.9-.8 1.9-1.2 2.6A9 9 0 1 0 12 3Z"/></svg>
+  {%- when 'tiktok' -%}
+    <svg {{ attrs }} fill="currentColor"><path d="M16.6 3h-3v12.2a2.7 2.7 0 1 1-2.7-2.7c.3 0 .6 0 .8.1V9.5a5.8 5.8 0 1 0 4.9 5.7V9.1a7.4 7.4 0 0 0 4.4 1.4V7.5A4.4 4.4 0 0 1 16.6 3Z"/></svg>
+  {%- when 'youtube' -%}
+    <svg {{ attrs }} fill="currentColor"><path d="M21.6 7.2a2.5 2.5 0 0 0-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4A2.5 2.5 0 0 0 2.4 7.2 26 26 0 0 0 2 12a26 26 0 0 0 .4 4.8 2.5 2.5 0 0 0 1.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4a2.5 2.5 0 0 0 1.8-1.8A26 26 0 0 0 22 12a26 26 0 0 0-.4-4.8ZM10 15V9l5.2 3L10 15Z"/></svg>
+  {%- when 'twitter' -%}
+    <svg {{ attrs }} fill="currentColor"><path d="M17.2 3.5h3l-6.6 7.5 7.8 10.3h-6.1l-4.8-6.2-5.5 6.2H2l7-8L1.6 3.5h6.2l4.3 5.7 5.1-5.7Zm-1 16h1.6L7 5.2H5.2l11 14.3Z"/></svg>
+  {%- when 'linkedin' -%}
+    <svg {{ attrs }} fill="currentColor"><path d="M6.9 20H3.4V9h3.5v11ZM5.1 7.5a2 2 0 1 1 0-4 2 2 0 0 1 0 4ZM20.6 20h-3.5v-5.4c0-1.3 0-2.9-1.8-2.9s-2 1.4-2 2.8V20H9.8V9h3.3v1.5c.5-.9 1.6-1.8 3.3-1.8 3.5 0 4.2 2.3 4.2 5.3V20Z"/></svg>
+  {%- when 'whatsapp' -%}
+    <svg {{ attrs }} fill="currentColor"><path d="M12 2.5a9.4 9.4 0 0 0-8.1 14.2L2.5 21.5l4.9-1.3A9.4 9.4 0 1 0 12 2.5Zm0 17.2a7.8 7.8 0 0 1-4-1.1l-.3-.2-2.9.8.8-2.8-.2-.3A7.8 7.8 0 1 1 12 19.7Zm4.3-5.8c-.2-.1-1.4-.7-1.6-.8-.2-.1-.4-.1-.5.1l-.8.9c-.1.2-.3.2-.5.1a6.4 6.4 0 0 1-3.2-2.8c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.7-1.7c-.2-.5-.4-.4-.5-.4h-.5a.9.9 0 0 0-.7.3 2.8 2.8 0 0 0-.9 2.1c0 1.2.9 2.4 1 2.6.1.2 1.8 2.7 4.3 3.8 1.6.7 2.2.8 3 .6.5-.1 1.4-.6 1.6-1.2.2-.6.2-1.1.1-1.2l-.8-.3Z"/></svg>
+{%- endcase -%}

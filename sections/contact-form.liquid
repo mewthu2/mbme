@@ -1,0 +1,141 @@
+<div
+  class="contact full-width section-spacing color-scheme--{{ section.settings.color_scheme }}"
+  style="--section-padding-top: {{ section.settings.padding_top }}px; --section-padding-bottom: {{ section.settings.padding_bottom }}px;"
+>
+  <div class="page-width contact__inner">
+    <div class="section-header">
+      {%- if section.settings.eyebrow != blank -%}<span class="eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+      {%- if section.settings.heading != blank -%}<h2>{{ section.settings.heading }}</h2>{%- endif -%}
+      {%- if section.settings.text != blank -%}<div>{{ section.settings.text }}</div>{%- endif -%}
+    </div>
+
+    {%- assign contact_form_id = 'ContactForm-' | append: section.id -%}
+    {%- form 'contact', id: contact_form_id, class: 'contact__form' -%}
+      {%- if form.posted_successfully? -%}
+        <p class="form-message" role="status">{{ 'contact.success' | t }}</p>
+      {%- elsif form.errors -%}
+        <div class="form-message form-message--error" role="alert">{{ form.errors | default_errors }}</div>
+      {%- endif -%}
+
+      {%- if section.settings.appointment_mode -%}
+        <input type="hidden" name="contact[{{ 'contact.subject' | t }}]" value="{{ 'contact.appointment_subject' | t }}">
+      {%- endif -%}
+
+      <div class="contact__grid">
+        <div class="field">
+          <label for="{{ section.id }}-name">{{ 'contact.name' | t }}</label>
+          <input id="{{ section.id }}-name" type="text" name="contact[{{ 'contact.name' | t }}]" value="{{ form.name }}" autocomplete="name" required>
+        </div>
+        <div class="field">
+          <label for="{{ section.id }}-email">{{ 'contact.email' | t }}</label>
+          <input id="{{ section.id }}-email" type="email" name="contact[email]" value="{{ form.email }}" autocomplete="email" required>
+        </div>
+        <div class="field">
+          <label for="{{ section.id }}-phone">{{ 'contact.phone' | t }}</label>
+          <input id="{{ section.id }}-phone" type="tel" name="contact[{{ 'contact.phone' | t }}]" value="{{ form.phone }}" autocomplete="tel">
+        </div>
+
+        {%- if section.settings.appointment_mode -%}
+          <div class="field">
+            <label for="{{ section.id }}-type">{{ 'contact.appointment_type' | t }}</label>
+            <select id="{{ section.id }}-type" name="contact[{{ 'contact.appointment_type' | t }}]">
+              <option>{{ 'contact.in_person' | t }}</option>
+              <option>{{ 'contact.virtual' | t }}</option>
+            </select>
+          </div>
+          {%- if section.settings.locations != blank -%}
+            <div class="field">
+              <label for="{{ section.id }}-location">{{ 'contact.location' | t }}</label>
+              <select id="{{ section.id }}-location" name="contact[{{ 'contact.location' | t }}]">
+                {%- assign locations = section.settings.locations | newline_to_br | split: '<br />' -%}
+                {%- for location in locations -%}
+                  {%- assign location_name = location | strip -%}
+                  {%- if location_name != blank -%}<option>{{ location_name }}</option>{%- endif -%}
+                {%- endfor -%}
+              </select>
+            </div>
+          {%- endif -%}
+          <div class="field">
+            <label for="{{ section.id }}-date">{{ 'contact.date' | t }}</label>
+            <input id="{{ section.id }}-date" type="date" name="contact[{{ 'contact.date' | t }}]" min="{{ 'now' | date: '%Y-%m-%d' }}" required>
+          </div>
+          <div class="field">
+            <label for="{{ section.id }}-time">{{ 'contact.time' | t }}</label>
+            <select id="{{ section.id }}-time" name="contact[{{ 'contact.time' | t }}]">
+              <option>{{ 'contact.morning' | t }}</option>
+              <option>{{ 'contact.afternoon' | t }}</option>
+              <option>{{ 'contact.evening' | t }}</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="{{ section.id }}-interest">{{ 'contact.interest' | t }}</label>
+            <input id="{{ section.id }}-interest" type="text" name="contact[{{ 'contact.interest' | t }}]">
+          </div>
+        {%- endif -%}
+
+        <div class="field contact__full">
+          <label for="{{ section.id }}-body">{{ 'contact.message' | t }}</label>
+          <textarea id="{{ section.id }}-body" name="contact[body]" rows="5">{{ form.body }}</textarea>
+        </div>
+      </div>
+      <button type="submit" class="button contact__submit">{% if section.settings.appointment_mode %}{{ 'contact.book' | t }}{% else %}{{ 'contact.send' | t }}{% endif %}</button>
+    {%- endform -%}
+  </div>
+</div>
+
+{% stylesheet %}
+  .contact__form {
+    display: grid;
+    gap: 1.5rem;
+    max-width: 48rem;
+    margin-inline: auto;
+  }
+
+  .contact__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+  }
+
+  .contact__full {
+    grid-column: 1 / -1;
+  }
+
+  .contact__submit {
+    justify-self: center;
+    min-width: 16rem;
+  }
+
+  @media (max-width: 749px) {
+    .contact__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Formulário de contato",
+  "class": "section-contact",
+  "settings": [
+    { "type": "checkbox", "id": "appointment_mode", "label": "Modo agendamento", "default": false, "info": "Adiciona campos de data, horário, tipo de atendimento e loja." },
+    { "type": "textarea", "id": "locations", "label": "Lojas / showrooms (um por linha)" },
+    { "type": "text", "id": "eyebrow", "label": "Sobretítulo" },
+    { "type": "text", "id": "heading", "label": "Título", "default": "Fale conosco" },
+    { "type": "richtext", "id": "text", "label": "Texto", "default": "<p>Nossa equipe responde em até 24 horas úteis.</p>" },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Fundo",
+      "options": [
+        { "value": "default", "label": "Padrão" },
+        { "value": "surface", "label": "Claro" }
+      ],
+      "default": "default"
+    },
+    { "type": "range", "id": "padding_top", "label": "Espaço superior", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 64 },
+    { "type": "range", "id": "padding_bottom", "label": "Espaço inferior", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 80 }
+  ],
+  "presets": [{ "name": "Formulário de contato" }]
+}
+{% endschema %}

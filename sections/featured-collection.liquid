@@ -1,0 +1,166 @@
+{%- liquid
+  assign collection = section.settings.collection
+  assign limit = section.settings.products_to_show
+-%}
+
+<section
+  class="featured-collection full-width color-scheme--{{ section.settings.color_scheme }} section-spacing"
+  style="--section-padding-top: {{ section.settings.padding_top }}px; --section-padding-bottom: {{ section.settings.padding_bottom }}px;"
+>
+  <scroll-slider class="page-width featured-collection__inner" style="--desktop-columns: {{ section.settings.columns }};">
+    <div class="featured-collection__header">
+      <div class="featured-collection__titles">
+        {%- if section.settings.eyebrow != blank -%}<span class="eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+        {%- if section.settings.heading != blank -%}<h2>{{ section.settings.heading }}</h2>{%- endif -%}
+        {%- if section.settings.text != blank -%}<div class="featured-collection__text">{{ section.settings.text }}</div>{%- endif -%}
+      </div>
+      {%- if section.settings.layout == 'carousel' -%}
+        <div class="slider-controls">
+          <button type="button" class="slider-button" data-slider-prev aria-label="{{ 'general.previous' | t }}">{% render 'icon', name: 'chevron-left' %}</button>
+          <button type="button" class="slider-button" data-slider-next aria-label="{{ 'general.next' | t }}">{% render 'icon', name: 'chevron-right' %}</button>
+        </div>
+      {%- endif -%}
+    </div>
+
+    <ul
+      class="featured-collection__list featured-collection__list--{{ section.settings.layout }}{% if section.settings.layout == 'carousel' %} scroll-track{% endif %}"
+      role="list"
+      {% if section.settings.layout == 'carousel' %}data-slider-track{% endif %}
+    >
+      {%- if collection != blank and collection.products_count > 0 -%}
+        {%- for product in collection.products limit: limit -%}
+          <li class="featured-collection__item">
+            {% render 'product-card', product: product, sizes: '(min-width: 990px) 25vw, (min-width: 750px) 33vw, 70vw' %}
+          </li>
+        {%- endfor -%}
+      {%- else -%}
+        {%- for i in (1..4) -%}
+          <li class="featured-collection__item">
+            <article class="product-card">
+              <div class="product-card__media media">{{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}</div>
+              <div class="product-card__info">
+                <h3 class="product-card__title">{{ 'general.product_placeholder' | t }}</h3>
+                <div class="price"><span class="price__current">{{ 199900 | money }}</span></div>
+              </div>
+            </article>
+          </li>
+        {%- endfor -%}
+      {%- endif -%}
+    </ul>
+
+    {%- if section.settings.show_view_all and collection != blank -%}
+      <div class="featured-collection__footer">
+        <a href="{{ collection.url }}" class="button button--secondary">{{ section.settings.view_all_label }}</a>
+      </div>
+    {%- endif -%}
+  </scroll-slider>
+</section>
+
+{% stylesheet %}
+  .featured-collection__inner {
+    display: block;
+  }
+
+  .featured-collection__header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1.5rem;
+    margin-block-end: 2.5rem;
+  }
+
+  .featured-collection__titles {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .featured-collection__text {
+    max-width: 36rem;
+    color: var(--color-muted);
+  }
+
+  .featured-collection__list {
+    padding: 0;
+    list-style: none;
+  }
+
+  .featured-collection__list--grid {
+    display: grid;
+    grid-template-columns: repeat(var(--desktop-columns), minmax(0, 1fr));
+    gap: 2.5rem 1.5rem;
+  }
+
+  .featured-collection__list--carousel {
+    --track-item-width: calc((100% - (var(--desktop-columns) - 1) * 1.5rem) / var(--desktop-columns));
+    --track-gap: 1.5rem;
+  }
+
+  .featured-collection__footer {
+    display: flex;
+    justify-content: center;
+    margin-block-start: 3rem;
+  }
+
+  @media (max-width: 989px) {
+    .featured-collection__list--grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 2rem 1rem;
+    }
+
+    .featured-collection__list--carousel {
+      --track-item-width: 42%;
+      --track-gap: 1rem;
+    }
+  }
+
+  @media (max-width: 749px) {
+    .featured-collection__list--carousel {
+      --track-item-width: 70%;
+    }
+
+    .featured-collection__header .slider-controls {
+      display: none;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Coleção em destaque",
+  "class": "section-featured-collection",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Sobretítulo", "default": "Assinatura" },
+    { "type": "text", "id": "heading", "label": "Título", "default": "Coleção Assinatura" },
+    { "type": "richtext", "id": "text", "label": "Texto", "default": "<p>Nossos designs icônicos, criados em nosso ateliê.</p>" },
+    { "type": "collection", "id": "collection", "label": "Coleção" },
+    { "type": "range", "id": "products_to_show", "label": "Quantidade de produtos", "min": 2, "max": 24, "step": 1, "default": 8 },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "options": [
+        { "value": "carousel", "label": "Carrossel" },
+        { "value": "grid", "label": "Grade" }
+      ],
+      "default": "carousel"
+    },
+    { "type": "range", "id": "columns", "label": "Colunas no desktop", "min": 2, "max": 5, "step": 1, "default": 4 },
+    { "type": "checkbox", "id": "show_view_all", "label": "Mostrar botão \"ver todos\"", "default": true },
+    { "type": "text", "id": "view_all_label", "label": "Texto do botão", "default": "Ver coleção" },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Fundo",
+      "options": [
+        { "value": "default", "label": "Padrão" },
+        { "value": "surface", "label": "Claro" }
+      ],
+      "default": "default"
+    },
+    { "type": "range", "id": "padding_top", "label": "Espaço superior", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 80 },
+    { "type": "range", "id": "padding_bottom", "label": "Espaço inferior", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 80 }
+  ],
+  "presets": [{ "name": "Coleção em destaque" }]
+}
+{% endschema %}

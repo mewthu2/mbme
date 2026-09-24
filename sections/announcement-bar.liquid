@@ -1,0 +1,118 @@
+{%- assign announcements = section.blocks -%}
+{%- if announcements.size > 0 -%}
+  <announcement-bar
+    class="announcement-bar full-width"
+    style="--announcement-bg: {{ section.settings.background }}; --announcement-fg: {{ section.settings.text_color }};"
+    data-interval="{{ section.settings.interval | times: 1000 }}"
+  >
+    <div class="announcement-bar__inner">
+      {%- for block in announcements -%}
+        <p class="announcement-bar__item" {{ block.shopify_attributes }} {% unless forloop.first %}hidden{% endunless %}>
+          {%- if block.settings.link != blank -%}
+            <a href="{{ block.settings.link }}">
+              {{- block.settings.text -}}
+              {%- if block.settings.link_label != blank %} <span class="announcement-bar__cta">{{ block.settings.link_label }}</span>{% endif -%}
+            </a>
+          {%- else -%}
+            {{- block.settings.text -}}
+          {%- endif -%}
+        </p>
+      {%- endfor -%}
+    </div>
+  </announcement-bar>
+{%- endif -%}
+
+{% stylesheet %}
+  .announcement-bar {
+    display: block;
+    background: var(--announcement-bg);
+    color: var(--announcement-fg);
+    text-align: center;
+  }
+
+  .announcement-bar__inner {
+    display: grid;
+    place-items: center;
+    min-height: 2.5rem;
+    padding: 0.5rem var(--page-margin);
+  }
+
+  .announcement-bar__item {
+    grid-area: 1 / 1;
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    animation: announcement-fade 0.6s ease;
+  }
+
+  .announcement-bar__item a {
+    text-decoration: none;
+  }
+
+  .announcement-bar__cta {
+    margin-inline-start: 0.5rem;
+    text-decoration: underline;
+    text-underline-offset: 0.3em;
+  }
+
+  @keyframes announcement-fade {
+    from {
+      opacity: 0;
+    }
+  }
+{% endstylesheet %}
+
+{% javascript %}
+  class AnnouncementBar extends HTMLElement {
+    connectedCallback() {
+      this.items = [...this.querySelectorAll('.announcement-bar__item')];
+      if (this.items.length < 2 || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      this.index = 0;
+      this.timer = setInterval(() => this.next(), Number(this.dataset.interval) || 5000);
+      this.addEventListener('mouseenter', () => clearInterval(this.timer));
+    }
+
+    disconnectedCallback() {
+      clearInterval(this.timer);
+    }
+
+    next() {
+      this.items[this.index].hidden = true;
+      this.index = (this.index + 1) % this.items.length;
+      this.items[this.index].hidden = false;
+    }
+  }
+
+  if (!customElements.get('announcement-bar')) customElements.define('announcement-bar', AnnouncementBar);
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Barra de anúncios",
+  "class": "section-announcement",
+  "max_blocks": 6,
+  "settings": [
+    { "type": "color", "id": "background", "label": "Fundo", "default": "#0F1729" },
+    { "type": "color", "id": "text_color", "label": "Texto", "default": "#FFFFFF" },
+    { "type": "range", "id": "interval", "label": "Troca automática a cada", "min": 3, "max": 10, "step": 1, "unit": "s", "default": 5 }
+  ],
+  "blocks": [
+    {
+      "type": "announcement",
+      "name": "Anúncio",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Texto", "default": "Frete grátis e seguro para todo o Brasil" },
+        { "type": "text", "id": "link_label", "label": "Texto do link" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Barra de anúncios",
+      "blocks": [{ "type": "announcement" }]
+    }
+  ],
+  "enabled_on": { "groups": ["header"] }
+}
+{% endschema %}

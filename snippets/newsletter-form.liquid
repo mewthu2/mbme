@@ -1,0 +1,80 @@
+{% doc %}
+  Renders a newsletter signup form that creates a subscribed customer.
+
+  @param {string} id - Unique id for the form
+
+  @example
+  {% render 'newsletter-form', id: section.id %}
+{% enddoc %}
+
+{%- form 'customer', id: id, class: 'newsletter-form' -%}
+  <input type="hidden" name="contact[tags]" value="newsletter">
+  {%- if form.posted_successfully? -%}
+    <p class="form-message" role="status">{{ 'newsletter.success' | t }}</p>
+  {%- else -%}
+    <div class="newsletter-form__field">
+      <label class="visually-hidden" for="{{ id }}-email">{{ 'newsletter.label' | t }}</label>
+      <input
+        id="{{ id }}-email"
+        type="email"
+        name="contact[email]"
+        class="newsletter-form__input"
+        value="{{ form.email }}"
+        placeholder="{{ 'newsletter.label' | t }}"
+        autocomplete="email"
+        autocorrect="off"
+        autocapitalize="off"
+        required
+        {% if form.errors %}aria-invalid="true" aria-describedby="{{ id }}-error"{% endif %}
+      >
+      <button type="submit" class="newsletter-form__button" aria-label="{{ 'newsletter.button' | t }}">
+        {% render 'icon', name: 'arrow-right' %}
+      </button>
+    </div>
+    {%- if form.errors -%}
+      <p id="{{ id }}-error" class="form-message form-message--error">{{ form.errors.translated_fields.email | capitalize }} {{ form.errors.messages.email }}</p>
+    {%- endif -%}
+  {%- endif -%}
+{%- endform -%}
+
+{% stylesheet %}
+  .newsletter-form__field {
+    display: flex;
+    border-bottom: 1px solid var(--color-foreground);
+  }
+
+  .newsletter-form__input {
+    flex: 1;
+    min-height: 3.25rem;
+    padding: 0 0.25rem;
+    border: 0;
+    background: transparent;
+    color: var(--color-foreground);
+  }
+
+  .newsletter-form__input::placeholder {
+    color: var(--color-muted);
+  }
+
+  .newsletter-form__input:focus {
+    outline: none;
+  }
+
+  .newsletter-form__button {
+    display: grid;
+    place-items: center;
+    width: 3.25rem;
+    border: 0;
+    background: none;
+    color: var(--color-foreground);
+    cursor: pointer;
+  }
+
+  .newsletter-form__button:hover {
+    color: var(--color-accent);
+  }
+
+  .newsletter-form .form-message {
+    margin-block-start: 0.75rem;
+  }
+{% endstylesheet %}

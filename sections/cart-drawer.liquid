@@ -1,0 +1,158 @@
+<dialog id="CartDrawer" class="drawer cart-drawer" aria-label="{{ 'cart.title' | t }}" scroll-lock>
+  <cart-drawer-items id="CartDrawerInner" class="cart-drawer__inner" data-cart-count="{{ cart.item_count }}">
+    <div class="drawer__header">
+      <span class="drawer__title">{{ 'cart.title' | t }} ({{ cart.item_count }})</span>
+      <button type="button" class="icon-button" data-dialog-close aria-label="{{ 'general.close' | t }}">
+        {% render 'icon', name: 'close' %}
+      </button>
+    </div>
+
+    {%- if cart.item_count > 0 -%}
+      {%- if settings.cart_free_shipping_text != blank -%}
+        <p class="cart-drawer__notice">{% render 'icon', name: 'truck' %}{{ settings.cart_free_shipping_text }}</p>
+      {%- endif -%}
+      <div class="cart-drawer__body">
+        {% render 'cart-line-items', context: 'drawer' %}
+      </div>
+      <div class="cart-drawer__footer">
+        {%- for discount in cart.cart_level_discount_applications -%}
+          <p class="cart-drawer__row cart-drawer__discount">
+            <span>{{ discount.title }}</span>
+            <span>-{{ discount.total_allocated_amount | money }}</span>
+          </p>
+        {%- endfor -%}
+        <p class="cart-drawer__row cart-drawer__total">
+          <span>{{ 'cart.subtotal' | t }}</span>
+          <span>{{ cart.total_price | money_with_currency }}</span>
+        </p>
+        <p class="cart-drawer__taxes">{{ 'cart.taxes_and_shipping' | t }}</p>
+        <form action="{{ routes.cart_url }}" method="post">
+          <button type="submit" name="checkout" class="button button--full">{{ 'cart.checkout' | t }}</button>
+        </form>
+        <a href="{{ routes.cart_url }}" class="link cart-drawer__view">{{ 'cart.view_cart' | t }}</a>
+      </div>
+    {%- else -%}
+      <div class="cart-drawer__empty">
+        <p>{{ 'cart.empty' | t }}</p>
+        <a href="{{ routes.all_products_collection_url }}" class="button">{{ 'cart.continue_shopping' | t }}</a>
+      </div>
+    {%- endif -%}
+  </cart-drawer-items>
+</dialog>
+
+{% stylesheet %}
+  .cart-drawer[open] {
+    display: flex;
+  }
+
+  .cart-drawer__inner {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+  }
+
+  .cart-drawer__inner.is-loading {
+    opacity: 0.6;
+    pointer-events: none;
+  }
+
+  .cart-drawer__notice {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: var(--color-surface);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+  }
+
+  .cart-drawer__body {
+    flex: 1;
+    overflow-y: auto;
+    padding-inline: 1.5rem;
+  }
+
+  .cart-drawer__footer {
+    display: grid;
+    gap: 0.75rem;
+    padding: 1.5rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .cart-drawer__row {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .cart-drawer__total {
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .cart-drawer__discount {
+    font-size: 0.8125rem;
+    color: var(--color-sale);
+  }
+
+  .cart-drawer__taxes {
+    font-size: 0.75rem;
+    color: var(--color-muted);
+  }
+
+  .cart-drawer__view {
+    justify-self: center;
+  }
+
+  .cart-drawer__empty {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 2rem;
+    text-align: center;
+  }
+{% endstylesheet %}
+
+{% javascript %}
+  class CartDrawerItems extends HTMLElement {
+    connectedCallback() {
+      this.addEventListener('change', (event) => {
+        const input = event.target.closest('input[data-line]');
+        if (input) this.update(Number(input.dataset.line), Number(input.value));
+      });
+      this.addEventListener('click', (event) => {
+        const remove = event.target.closest('[data-line-remove]');
+        if (!remove) return;
+        event.preventDefault();
+        this.update(Number(remove.dataset.lineRemove), 0);
+      });
+    }
+
+    async update(line, quantity) {
+      this.classList.add('is-loading');
+      try {
+        const data = await window.Cart.change(line, quantity);
+        window.Cart.render(data.sections);
+      } catch (error) {
+        window.location.reload();
+      } finally {
+        this.classList.remove('is-loading');
+      }
+    }
+  }
+
+  if (!customElements.get('cart-drawer-items')) customElements.define('cart-drawer-items', CartDrawerItems);
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Carrinho lateral",
+  "settings": []
+}
+{% endschema %}

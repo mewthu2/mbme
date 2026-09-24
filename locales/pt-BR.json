@@ -1,0 +1,158 @@
+{
+  "404": {
+    "title": "Página não encontrada",
+    "not_found": "A página que você procura não existe ou foi movida.",
+    "back_to_shopping": "Continuar comprando"
+  },
+  "accessibility": {
+    "skip_to_content": "Pular para o conteúdo"
+  },
+  "general": {
+    "breadcrumbs": "Navegação estrutural",
+    "close": "Fechar",
+    "home": "Início",
+    "next": "Próximo",
+    "previous": "Anterior",
+    "pagination": "Paginação",
+    "product_placeholder": "Nome do produto",
+    "rating": "{{ rating }} de 5 estrelas",
+    "whatsapp": "Fale conosco pelo WhatsApp"
+  },
+  "header": {
+    "account": "Minha conta",
+    "cart": "Sacola",
+    "main_navigation": "Navegação principal",
+    "menu": "Menu",
+    "search": "Buscar",
+    "view_all": "Ver tudo em {{ title }}"
+  },
+  "localization": {
+    "country": "País/região",
+    "language": "Idioma",
+    "update": "Atualizar"
+  },
+  "newsletter": {
+    "label": "Seu e-mail",
+    "button": "Inscrever-se",
+    "success": "Obrigado por se inscrever!"
+  },
+  "footer": {
+    "rights": "Todos os direitos reservados."
+  },
+  "blog": {
+    "all": "Todos",
+    "article_comments": "Comentários",
+    "article_metadata_html": "{{ date }} por {{ author }}",
+    "comment_form_body": "Comentário",
+    "comment_form_email": "E-mail",
+    "comment_form_name": "Nome",
+    "comment_form_submit": "Publicar comentário",
+    "comment_form_title": "Deixe um comentário",
+    "comment_moderated": "Seu comentário foi enviado e será publicado após aprovação.",
+    "comment_posted": "Seu comentário foi publicado.",
+    "read_more": "Ler mais"
+  },
+  "cart": {
+    "checkout": "Finalizar compra",
+    "continue_shopping": "Continuar comprando",
+    "decrease": "Diminuir quantidade de {{ product }}",
+    "increase": "Aumentar quantidade de {{ product }}",
+    "empty": "Sua sacola está vazia.",
+    "error": "Algo deu errado. Tente novamente.",
+    "note": "Observações do pedido",
+    "quantity": "Quantidade",
+    "quantity_for": "Quantidade de {{ product }}",
+    "remove": "Remover",
+    "subtotal": "Subtotal",
+    "taxes_and_shipping": "Impostos e frete calculados no checkout.",
+    "title": "Sua sacola",
+    "update": "Atualizar",
+    "view_cart": "Ver sacola"
+  },
+  "collections": {
+    "apply": "Aplicar",
+    "clear_all": "Limpar filtros",
+    "empty": "Nenhum produto encontrado.",
+    "filter": "Filtrar",
+    "from": "De",
+    "to": "Até",
+    "product_count": {
+      "one": "{{ count }} produto",
+      "other": "{{ count }} produtos"
+    },
+    "sort_by": "Ordenar por",
+    "title": "Coleções"
+  },
+  "contact": {
+    "afternoon": "Tarde (12h – 18h)",
+    "appointment_subject": "Solicitação de agendamento",
+    "appointment_type": "Tipo de atendimento",
+    "book": "Solicitar agendamento",
+    "date": "Data preferida",
+    "email": "E-mail",
+    "evening": "Noite (após 18h)",
+    "in_person": "Presencial",
+    "interest": "O que você procura?",
+    "location": "Showroom",
+    "message": "Mensagem",
+    "morning": "Manhã (9h – 12h)",
+    "name": "Nome",
+    "phone": "Telefone",
+    "send": "Enviar mensagem",
+    "subject": "Assunto",
+    "success": "Obrigado pelo contato! Responderemos em breve.",
+    "time": "Horário preferido",
+    "virtual": "Virtual (videochamada)"
+  },
+  "gift_card": {
+    "add_to_apple_wallet": "Adicionar à Apple Wallet",
+    "card": "Cartão-presente",
+    "expired": "Este cartão-presente expirou",
+    "expires_on": "Válido até {{ expires_on }}",
+    "use_at_checkout": "Use este cartão-presente no checkout"
+  },
+  "password": {
+    "enter": "Entrar",
+    "login": "Entrar com senha",
+    "password": "Senha",
+    "title": "Em breve"
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Adicionar à sacola",
+      "discount": "-{{ percent }}%",
+      "installments_html": "ou <strong>{{ parcels }}x de {{ amount }}</strong> sem juros",
+      "low_stock": {
+        "one": "Resta apenas {{ count }} unidade",
+        "other": "Restam apenas {{ count }} unidades"
+      },
+      "media_label": "Mostrar mídia {{ index }} de {{ count }}",
+      "price_from": "A partir de",
+      "regular_price": "Preço normal",
+      "sale_price": "Preço promocional",
+      "size_guide": "Guia de tamanhos",
+      "sku": "Código",
+      "sold_out": "Esgotado",
+      "taxes_included": "Impostos inclusos.",
+      "unavailable": "Indisponível",
+      "whatsapp": "WhatsApp",
+      "whatsapp_message": "Olá! Gostaria de mais informações sobre {{ product }}.",
+      "zoom": "Ampliar imagem"
+    }
+  },
+  "search": {
+    "collections": "Coleções",
+    "no_results_html": "Nenhum resultado para “{{ terms }}”.",
+    "page": "Página",
+    "pages": "Páginas e artigos",
+    "placeholder": "Buscar anéis, diamantes, joias…",
+    "products": "Produtos",
+    "results_for_html": {
+      "one": "{{ count }} resultado para “{{ terms }}”",
+      "other": "{{ count }} resultados para “{{ terms }}”"
+    },
+    "submit": "Buscar",
+    "title": "Buscar",
+    "view_all": "Ver todos os resultados para “{{ terms }}”"
+  }
+}
