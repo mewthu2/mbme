@@ -37,7 +37,16 @@
         },
         "contact_4": {
           "type": "contact",
-          "settings": {}
+          "settings": {
+            "heading": "Fale conosco",
+            "phone": "(11) 0000-0000",
+            "show_whatsapp": true,
+            "email": "contato@sualoja.com.br",
+            "hours": "Seg. a sex.: 9h às 18h\nSáb.: 10h às 14h",
+            "address": "",
+            "button_label": "Entre em contato",
+            "button_link": ""
+          }
         }
       },
       "block_order": [
@@ -48,9 +57,22 @@
       ],
       "settings": {
         "color_scheme": "dark",
+        "show_newsletter": true,
+        "newsletter_heading": "Vamos manter contato",
+        "newsletter_text": "<p>Receba lançamentos, ofertas exclusivas e conteúdos sobre joias em primeira mão.</p>",
+        "show_social": true,
+        "social_heading": "Siga-nos",
+        "show_payment_icons": true,
+        "show_pix": true,
+        "show_boleto": true,
+        "payment_list": "visa,master,american_express,elo,hipercard,diners_club",
+        "payment_force_manual": false,
+        "installments_text": "Parcele em até 10x sem juros no cartão",
+        "seal_1": "Compra 100% segura",
+        "seal_2": "Site protegido com certificado SSL",
         "legal_text": "<p>Razão social · CNPJ 00.000.000/0001-00 · Endereço completo</p>",
-        "show_localization": true,
-        "show_payment_icons": true
+        "legal_menu": "",
+        "show_localization": true
       }
     }
   },
