@@ -216,6 +216,7 @@
     "bespoke": {
       "type": "image-with-text",
       "settings": {
+        "image": "shopify://shop_images/JUF_1304_jpg.jpg",
         "layout": "image-left",
         "full_bleed": true,
         "color_scheme": "surface",
@@ -298,7 +299,7 @@
           "type": "testimonial",
           "settings": {
             "rating": 5,
-            "quote": "Recebi o certificado do diamante e toda a orientação para escolher a pedra ideal. Recomendo muito!",
+            "quote": "Recebi o certificado da esmeralda e toda a orientação para escolher a pedra ideal. Recomendo muito!",
             "author": "Rafael T."
           }
         },
@@ -343,9 +344,9 @@
         "eyebrow": "Saiba mais",
         "heading": "Sobre a MBM",
         "text": "<p>Descubra nossas joias pessoalmente, com a orientação de um especialista, em um ambiente exclusivo e reservado.</p>",
-        "button_label_1": "Agendar visita",
+        "button_label_1": "Saiba mais",
         "button_link_1": "",
-        "button_label_2": "Conheça nossos showrooms",
+        "button_label_2": "Conheça nossa história",
         "button_link_2": "",
         "padding_top": 64,
         "padding_bottom": 64
