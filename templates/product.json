@@ -1,32 +1,64 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
       "type": "product",
-      "settings": {},
       "blocks": {
         "title_1": {
           "type": "title",
-          "settings": {}
+          "settings": {
+            "show_vendor": false
+          }
         },
         "price_2": {
           "type": "price",
-          "settings": {}
+          "settings": {
+            "show_installments": true,
+            "installments": 10,
+            "show_tax_note": false
+          }
         },
         "variant_picker_3": {
           "type": "variant_picker",
-          "settings": {}
+          "settings": {
+            "picker_style": "pills",
+            "swatch_style": "swatch",
+            "size_guide_page": "",
+            "size_guide_option": "tamanho"
+          }
         },
         "buy_buttons_4": {
           "type": "buy_buttons",
-          "settings": {}
+          "settings": {
+            "show_quantity": false,
+            "show_dynamic_checkout": true
+          }
         },
         "appointment_5": {
           "type": "appointment",
-          "settings": {}
+          "settings": {
+            "heading": "Precisa de ajuda? Fale com um especialista.",
+            "button_label": "Tire suas dúvidas",
+            "link": "",
+            "show_whatsapp": true
+          }
         },
         "trust_6": {
           "type": "trust",
-          "settings": {}
+          "settings": {
+            "item_1": "Frete grátis e segurado",
+            "item_2": "30 dias para troca",
+            "item_3": "Pedras certificadas",
+            "item_4": "Garantia vitalícia"
+          }
         },
         "description_7": {
           "type": "description",
@@ -38,14 +70,16 @@
           "type": "collapsible_tab",
           "settings": {
             "heading": "Entrega e devoluções",
-            "content": "<p>Frete grátis e segurado para todo o Brasil. Trocas e devoluções em até 30 dias.</p>"
+            "content": "<p>Frete grátis e segurado para todo o Brasil. Trocas e devoluções em até 30 dias.</p>",
+            "page": ""
           }
         },
         "collapsible_tab_9": {
           "type": "collapsible_tab",
           "settings": {
             "heading": "Garantia e certificado",
-            "content": "<p>Todas as peças acompanham certificado de autenticidade e garantia vitalícia contra defeitos de fabricação.</p>"
+            "content": "<p>Todas as peças acompanham certificado de autenticidade e garantia vitalícia contra defeitos de fabricação.</p>",
+            "page": ""
           }
         }
       },
@@ -59,11 +93,22 @@
         "description_7",
         "collapsible_tab_8",
         "collapsible_tab_9"
-      ]
+      ],
+      "settings": {
+        "show_breadcrumbs": true,
+        "padding_top": 32,
+        "padding_bottom": 64
+      }
     },
     "related": {
       "type": "related-products",
-      "settings": {}
+      "settings": {
+        "heading": "Você também pode gostar",
+        "products_to_show": 8,
+        "intent": "related",
+        "padding_top": 72,
+        "padding_bottom": 72
+      }
     }
   },
   "order": [
