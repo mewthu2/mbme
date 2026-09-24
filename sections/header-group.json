@@ -1,28 +1,41 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "type": "header",
   "name": "Cabeçalho",
   "sections": {
     "announcement": {
       "type": "announcement-bar",
-      "settings": {},
       "blocks": {
         "announcement_1": {
           "type": "announcement",
           "settings": {
             "text": "Promoção de primavera: até 30% de desconto",
-            "link_label": "Comprar agora"
+            "link_label": "Comprar agora",
+            "link": ""
           }
         },
         "announcement_2": {
           "type": "announcement",
           "settings": {
-            "text": "Frete grátis e segurado para todo o Brasil"
+            "text": "Frete grátis e segurado para todo o Brasil",
+            "link_label": "",
+            "link": ""
           }
         },
         "announcement_3": {
           "type": "announcement",
           "settings": {
-            "text": "Parcele em até 10x sem juros"
+            "text": "Parcele em até 10x sem juros",
+            "link_label": "",
+            "link": ""
           }
         }
       },
@@ -30,11 +43,24 @@
         "announcement_1",
         "announcement_2",
         "announcement_3"
-      ]
+      ],
+      "settings": {
+        "background": "#0f1729",
+        "text_color": "#ffffff",
+        "interval": 5
+      }
     },
     "header": {
       "type": "header",
-      "settings": {}
+      "settings": {
+        "menu": "main-menu",
+        "customer_account_menu": "customer-account-main-menu",
+        "sticky": true,
+        "show_search": true,
+        "show_localization": true,
+        "appointment_label": "Esmeraldas certificadas",
+        "appointment_link": ""
+      }
     }
   },
   "order": [
