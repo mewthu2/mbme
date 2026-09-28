@@ -70,9 +70,9 @@
         "collection_1": {
           "type": "collection",
           "settings": {
-            "collection": "",
-            "label": "Anéis de noivado",
-            "link": ""
+            "collection": "coracao",
+            "label": "Coração",
+            "link": "shopify://collections/coracao"
           }
         },
         "collection_2": {
