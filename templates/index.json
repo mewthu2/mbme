@@ -104,6 +104,7 @@
         "shape_1": {
           "type": "shape",
           "settings": {
+            "image": "shopify://shop_images/2.png",
             "label": "Redondo",
             "link": ""
           }
@@ -111,6 +112,7 @@
         "shape_2": {
           "type": "shape",
           "settings": {
+            "image": "shopify://shop_images/3_66fad6f6-c033-47f2-99bb-5cd78bce5a97.png",
             "label": "Oval",
             "link": ""
           }
@@ -125,6 +127,7 @@
         "shape_4": {
           "type": "shape",
           "settings": {
+            "image": "shopify://shop_images/4.png",
             "label": "Esmeralda",
             "link": ""
           }
@@ -139,6 +142,7 @@
         "shape_6": {
           "type": "shape",
           "settings": {
+            "image": "shopify://shop_images/1.png",
             "label": "Coração",
             "link": ""
           }
