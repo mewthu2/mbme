@@ -72,7 +72,7 @@
           "settings": {
             "collection": "coracao",
             "label": "Coração",
-            "image": "shopify://shop_images/coracao_567a1872-3614-445b-af9b-2ca67e45e11d.png",
+            "image": "shopify://shop_images/1.png",
             "link": "shopify://collections/coracao"
           }
         },
@@ -81,7 +81,7 @@
           "settings": {
             "collection": "",
             "label": "Redondo",
-            "image": "shopify://shop_images/redondo.png",
+            "image": "shopify://shop_images/2.png",
             "link": "shopify://collections/redondo"
           }
         },
@@ -90,7 +90,7 @@
           "settings": {
             "collection": "",
             "label": "Oval",
-            "image": "shopify://shop_images/Imagem_do_ChatGPT_29_de_set._de_2026_13_57_27.png",
+            "image": "shopify://shop_images/3.png",
             "link": "shopify://collections/oval"
           }
         },
@@ -99,7 +99,7 @@
           "settings": {
             "collection": "",
             "label": "Quadrado",
-            "image": "shopify://shop_images/quadrado.png",
+            "image": "shopify://shop_images/4.png",
             "link": ""
           }
         },
