@@ -1,14 +1,31 @@
 {%- liquid
   assign image = section.settings.image
   assign mobile_image = section.settings.mobile_image | default: image
+  assign video = section.settings.video
+  assign link = section.settings.link
+
+  comment
+    Banner sem texto = arte pronta (texto já na imagem): nunca cortar, altura segue a imagem.
+  endcomment
+  assign height = section.settings.height
+  assign has_text = false
+  if section.settings.eyebrow != blank or section.settings.heading != blank or section.settings.text != blank or section.settings.button_label_1 != blank or section.settings.button_label_2 != blank
+    assign has_text = true
+  endif
+  if has_text == false
+    assign height = 'adapt'
+  endif
 -%}
 
 <section
-  class="hero full-width hero--{{ section.settings.height }} hero--{{ section.settings.content_position }}"
-  style="--hero-overlay: {{ section.settings.overlay_opacity | divided_by: 100.0 }}; --hero-text: {{ section.settings.text_color }};{% if image %} --hero-ratio: {{ image.aspect_ratio }}; --hero-ratio-mobile: {{ mobile_image.aspect_ratio }};{% endif %}"
+  class="hero full-width hero--{{ height }} hero--{{ section.settings.content_position }}"
+  style="--hero-overlay: {{ section.settings.overlay_opacity | divided_by: 100.0 }}; --hero-text: {{ section.settings.text_color }};"
 >
   <div class="hero__media">
-    {%- if image -%}
+    {%- if video != blank -%}
+      {%- assign poster = video.preview_image | default: image -%}
+      {{ video | video_tag: autoplay: true, muted: true, loop: true, playsinline: true, controls: false, preload: 'auto', poster: poster, class: 'hero__image hero__video' }}
+    {%- elsif image -%}
       <picture>
         {%- if section.settings.mobile_image -%}
           <source media="(max-width: 749px)" srcset="{{ mobile_image | image_url: width: 750 }} 750w, {{ mobile_image | image_url: width: 1100 }} 1100w, {{ mobile_image | image_url: width: 1500 }} 1500w" sizes="100vw">
@@ -19,6 +36,10 @@
       {{ 'hero-apparel-1' | placeholder_svg_tag: 'placeholder-svg hero__image' }}
     {%- endif -%}
   </div>
+
+  {%- if link != blank -%}
+    <a href="{{ link }}" class="hero__link" aria-label="{{ section.settings.heading | default: section.settings.eyebrow | default: 'Banner' | escape }}"></a>
+  {%- endif -%}
 
   <div class="hero__content page-width">
     <div class="hero__text">
@@ -99,12 +120,27 @@
 
   .hero--adapt .hero__media {
     height: auto;
-    aspect-ratio: var(--hero-ratio, 16 / 9);
+  }
+
+  .hero--adapt .hero__media picture {
+    display: block;
+  }
+
+  .hero--adapt .hero__image {
+    position: static;
+    display: block;
+    height: auto;
+  }
+
+  .hero__link {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
   }
 
   .hero__content {
     position: relative;
-    z-index: 1;
+    z-index: 2;
     display: flex;
     height: 100%;
     padding-block: 4rem;
@@ -130,6 +166,14 @@
     align-items: flex-end;
     justify-content: center;
     text-align: center;
+  }
+
+  .hero__link ~ .hero__content {
+    pointer-events: none;
+  }
+
+  .hero__link ~ .hero__content a {
+    pointer-events: auto;
   }
 
   .hero__text {
@@ -171,10 +215,6 @@
   }
 
   @media (max-width: 749px) {
-    .hero--adapt .hero__media {
-      aspect-ratio: var(--hero-ratio-mobile, 4 / 5);
-    }
-
     .hero__content {
       padding-block: 2.5rem;
     }
@@ -192,6 +232,8 @@
   "settings": [
     { "type": "image_picker", "id": "image", "label": "Imagem (desktop)" },
     { "type": "image_picker", "id": "mobile_image", "label": "Imagem (celular)", "info": "Opcional. Recomendado formato retrato." },
+    { "type": "video", "id": "video", "label": "Vídeo", "info": "Opcional. Substitui a imagem; toca automaticamente, sem som e em loop." },
+    { "type": "url", "id": "link", "label": "Link do banner", "info": "Opcional. Deixa o banner inteiro clicável." },
     {
       "type": "select",
       "id": "height",
