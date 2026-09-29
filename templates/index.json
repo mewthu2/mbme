@@ -246,59 +246,6 @@
         "padding_bottom": 64
       }
     },
-    "press": {
-      "type": "logo-list",
-      "blocks": {
-        "logo_1": {
-          "type": "logo",
-          "settings": {
-            "name": "Vogue",
-            "link": ""
-          }
-        },
-        "logo_2": {
-          "type": "logo",
-          "settings": {
-            "name": "Forbes",
-            "link": ""
-          }
-        },
-        "logo_3": {
-          "type": "logo",
-          "settings": {
-            "name": "Elle",
-            "link": ""
-          }
-        },
-        "logo_4": {
-          "type": "logo",
-          "settings": {
-            "name": "Marie Claire",
-            "link": ""
-          }
-        },
-        "logo_5": {
-          "type": "logo",
-          "settings": {
-            "name": "Harper's Bazaar",
-            "link": ""
-          }
-        }
-      },
-      "block_order": [
-        "logo_1",
-        "logo_2",
-        "logo_3",
-        "logo_4",
-        "logo_5"
-      ],
-      "settings": {
-        "heading": "Como visto em",
-        "color_scheme": "default",
-        "padding_top": 48,
-        "padding_bottom": 48
-      }
-    },
     "reviews": {
       "type": "testimonials",
       "blocks": {
@@ -386,7 +333,6 @@
     "shapes",
     "categories",
     "bespoke",
-    "press",
     "reviews",
     "showroom",
     "newsletter"
