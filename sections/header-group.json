@@ -98,7 +98,8 @@
           "type": "collection",
           "settings": {
             "collection": "",
-            "label": "Brincos",
+            "label": "Quadrado",
+            "image": "shopify://shop_images/quadrado.png",
             "link": ""
           }
         },
