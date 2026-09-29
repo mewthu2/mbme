@@ -82,7 +82,7 @@
             "collection": "",
             "label": "Redondo",
             "image": "shopify://shop_images/redondo.png",
-            "link": ""
+            "link": "shopify://collections/redondo"
           }
         },
         "collection_3": {
@@ -91,7 +91,7 @@
             "collection": "",
             "label": "Oval",
             "image": "shopify://shop_images/oval.png",
-            "link": ""
+            "link": "shopify://collections/oval"
           }
         },
         "collection_4": {
