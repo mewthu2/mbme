@@ -123,6 +123,7 @@
           "settings": {
             "collection": "",
             "label": "Esmeraldas",
+            "image": "shopify://shop_images/esmera.png",
             "link": ""
           }
         },
