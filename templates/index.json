@@ -12,16 +12,18 @@
     "hero": {
       "type": "hero",
       "settings": {
-        "height": "large",
-        "content_position": "middle-left",
-        "overlay_opacity": 35,
+        "image": "shopify://shop_images/banner-esmeraldas-desktop_1.png",
+        "mobile_image": "shopify://shop_images/banner-esmeraldas-mobile.png",
+        "height": "full",
+        "content_position": "middle-center",
+        "overlay_opacity": 0,
         "text_color": "#ffffff",
-        "eyebrow": "Nova coleção",
-        "heading": "Capture a luz",
-        "text": "<p>Joias criadas com excelência para o seu momento. Agora com até 30% de desconto.</p>",
-        "button_label_1": "Anéis de noivado",
+        "eyebrow": "",
+        "heading": "",
+        "text": "",
+        "button_label_1": "",
         "button_link_1": "",
-        "button_label_2": "Joias com esmeraldas",
+        "button_label_2": "",
         "button_link_2": ""
       }
     },
