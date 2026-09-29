@@ -80,7 +80,8 @@
           "type": "collection",
           "settings": {
             "collection": "",
-            "label": "Alianças",
+            "label": "Redondo",
+            "image": "shopify://shop_images/redondo.png",
             "link": ""
           }
         },
@@ -88,8 +89,8 @@
           "type": "collection",
           "settings": {
             "collection": "",
-            "label": "Eternidade",
-            "image": "shopify://shop_images/eter.png",
+            "label": "Oval",
+            "image": "shopify://shop_images/oval.png",
             "link": ""
           }
         },
