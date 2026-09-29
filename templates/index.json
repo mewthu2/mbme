@@ -15,7 +15,7 @@
         "image": "shopify://shop_images/12341234.png",
         "mobile_image": "shopify://shop_images/banner-esmeraldas-mobile_1.png",
         "link": "",
-        "height": "medium",
+        "height": "adapt",
         "content_position": "middle-center",
         "overlay_opacity": 0,
         "text_color": "#ffffff",
