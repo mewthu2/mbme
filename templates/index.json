@@ -185,6 +185,7 @@
         "tile_1": {
           "type": "tile",
           "settings": {
+            "image": "shopify://shop_images/card-mobile-esmeraldas.png",
             "video_url": "",
             "video_controls": false,
             "eyebrow": "",
@@ -199,6 +200,7 @@
         "tile_2": {
           "type": "tile",
           "settings": {
+            "image": "shopify://shop_images/card-mobile-extracao.png",
             "video_url": "",
             "video_controls": false,
             "eyebrow": "",
