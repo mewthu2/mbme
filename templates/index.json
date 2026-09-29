@@ -12,7 +12,7 @@
     "hero": {
       "type": "hero",
       "settings": {
-        "image": "shopify://shop_images/banner-esmeraldas-desktop_1.png",
+        "image": "shopify://shop_images/12341234.png",
         "mobile_image": "shopify://shop_images/banner-esmeraldas-mobile_1.png",
         "link": "",
         "height": "medium",
@@ -181,7 +181,6 @@
         "tile_1": {
           "type": "tile",
           "settings": {
-            "image": "shopify://shop_images/card-mobile-esmeraldas.png",
             "video_url": "",
             "video_controls": false,
             "eyebrow": "",
