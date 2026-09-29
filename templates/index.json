@@ -14,6 +14,7 @@
       "settings": {
         "image": "shopify://shop_images/banner-esmeraldas-desktop_1.png",
         "mobile_image": "shopify://shop_images/banner-esmeraldas-mobile_1.png",
+        "link": "",
         "height": "medium",
         "content_position": "middle-center",
         "overlay_opacity": 0,
@@ -180,6 +181,7 @@
         "tile_1": {
           "type": "tile",
           "settings": {
+            "image": "shopify://shop_images/card-mobile-esmeraldas.png",
             "video_url": "",
             "video_controls": false,
             "eyebrow": "",
