@@ -221,9 +221,16 @@
   @media (max-width: 749px) {
     .collection-strip__list {
       width: auto;
+      max-width: none;
       margin-inline: calc(var(--page-margin) * -1);
       padding-inline: var(--page-margin);
       scroll-padding-inline: var(--page-margin);
+    }
+
+    .collection-strip__list > li {
+      flex: 1 0 auto;
+      display: flex;
+      justify-content: center;
     }
 
     .collection-strip__arrow {

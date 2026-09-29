@@ -5,7 +5,7 @@
 
 <section
   class="hero full-width hero--{{ section.settings.height }} hero--{{ section.settings.content_position }}"
-  style="--hero-overlay: {{ section.settings.overlay_opacity | divided_by: 100.0 }}; --hero-text: {{ section.settings.text_color }};"
+  style="--hero-overlay: {{ section.settings.overlay_opacity | divided_by: 100.0 }}; --hero-text: {{ section.settings.text_color }};{% if image %} --hero-ratio: {{ image.aspect_ratio }}; --hero-ratio-mobile: {{ mobile_image.aspect_ratio }};{% endif %}"
 >
   <div class="hero__media">
     {%- if image -%}
@@ -94,13 +94,12 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    animation: hero-zoom 12s ease-out both;
+    object-position: center;
   }
 
-  @keyframes hero-zoom {
-    from {
-      transform: scale(1.08);
-    }
+  .hero--adapt .hero__media {
+    height: auto;
+    aspect-ratio: var(--hero-ratio, 16 / 9);
   }
 
   .hero__content {
@@ -172,6 +171,10 @@
   }
 
   @media (max-width: 749px) {
+    .hero--adapt .hero__media {
+      aspect-ratio: var(--hero-ratio-mobile, 4 / 5);
+    }
+
     .hero__content {
       padding-block: 2.5rem;
     }
@@ -194,12 +197,14 @@
       "id": "height",
       "label": "Altura",
       "options": [
+        { "value": "adapt", "label": "Adaptar à imagem" },
         { "value": "small", "label": "Pequena" },
         { "value": "medium", "label": "Média" },
         { "value": "large", "label": "Grande" },
         { "value": "full", "label": "Tela cheia" }
       ],
-      "default": "large"
+      "default": "adapt",
+      "info": "\"Adaptar à imagem\" mostra a imagem inteira, sem cortes, no desktop e no celular."
     },
     {
       "type": "select",
