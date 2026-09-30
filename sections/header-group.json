@@ -17,7 +17,7 @@
         "announcement_1": {
           "type": "announcement",
           "settings": {
-            "text": "Promoção de primavera: até 30% de desconto",
+            "text": "Promoção de lançamento: 20% de desconto.",
             "link_label": "Comprar agora",
             "link": ""
           }
@@ -25,7 +25,7 @@
         "announcement_2": {
           "type": "announcement",
           "settings": {
-            "text": "Frete grátis e segurado para todo o Brasil",
+            "text": "Frete grátis para todo o Brasil!",
             "link_label": "",
             "link": ""
           }
@@ -33,7 +33,7 @@
         "announcement_3": {
           "type": "announcement",
           "settings": {
-            "text": "Parcele em até 10x sem juros",
+            "text": "Parcele em até 4 vezes sem juros!",
             "link_label": "",
             "link": ""
           }
