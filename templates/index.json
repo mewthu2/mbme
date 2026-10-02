@@ -12,8 +12,8 @@
     "hero": {
       "type": "hero",
       "settings": {
-        "image": "shopify://shop_images/Esmeraldas_de_Minas_Gerais_1.png",
-        "mobile_image": "shopify://shop_images/banner-esmeraldas-mobile_1.png",
+        "image": "shopify://shop_images/banner_novo.png",
+        "mobile_image": "shopify://shop_images/banner_novo_mobile.png",
         "link": "",
         "height": "adapt",
         "content_position": "middle-center",
@@ -277,6 +277,7 @@
     "showroom": {
       "type": "image-with-text",
       "settings": {
+        "image": "shopify://shop_images/Esmeralda_sobre_Marmore_Nebuloso.png",
         "layout": "overlay",
         "full_bleed": true,
         "color_scheme": "dark",
@@ -288,7 +289,7 @@
         "button_link_1": "",
         "button_label_2": "Conheça nossa história",
         "button_link_2": "",
-        "padding_top": 64,
+        "padding_top": 60,
         "padding_bottom": 64
       }
     },
