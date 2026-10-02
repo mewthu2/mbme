@@ -106,7 +106,7 @@
           "settings": {
             "image": "shopify://shop_images/2.png",
             "label": "Redondo",
-            "link": ""
+            "link": "shopify://collections/redondo"
           }
         },
         "shape_2": {
@@ -114,14 +114,7 @@
           "settings": {
             "image": "shopify://shop_images/3_66fad6f6-c033-47f2-99bb-5cd78bce5a97.png",
             "label": "Oval",
-            "link": ""
-          }
-        },
-        "shape_3": {
-          "type": "shape",
-          "settings": {
-            "label": "Princesa",
-            "link": ""
+            "link": "shopify://collections/oval"
           }
         },
         "shape_4": {
@@ -129,14 +122,7 @@
           "settings": {
             "image": "shopify://shop_images/4.png",
             "label": "Esmeralda",
-            "link": ""
-          }
-        },
-        "shape_5": {
-          "type": "shape",
-          "settings": {
-            "label": "Pera",
-            "link": ""
+            "link": "shopify://collections/esmeraldas"
           }
         },
         "shape_6": {
@@ -144,20 +130,14 @@
           "settings": {
             "image": "shopify://shop_images/1.png",
             "label": "Coração",
-            "link": ""
+            "link": "shopify://collections/coracao"
           }
         },
         "shape_7": {
           "type": "shape",
           "settings": {
-            "label": "Almofada",
-            "link": ""
-          }
-        },
-        "shape_8": {
-          "type": "shape",
-          "settings": {
-            "label": "Marquise",
+            "image": "shopify://shop_images/Gota_Geometrica_em_Ouro_Rose.png",
+            "label": "Gotas",
             "link": ""
           }
         }
@@ -165,12 +145,9 @@
       "block_order": [
         "shape_1",
         "shape_2",
-        "shape_3",
         "shape_4",
-        "shape_5",
         "shape_6",
-        "shape_7",
-        "shape_8"
+        "shape_7"
       ],
       "settings": {
         "eyebrow": "",

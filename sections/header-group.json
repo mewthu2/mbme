@@ -98,33 +98,17 @@
           "type": "collection",
           "settings": {
             "collection": "",
-            "label": "Quadrado",
+            "label": "Esmeraldas",
             "image": "shopify://shop_images/4.png",
-            "link": ""
+            "link": "shopify://collections/esmeraldas"
           }
         },
         "collection_5": {
           "type": "collection",
           "settings": {
             "collection": "",
-            "label": "Colares",
-            "link": ""
-          }
-        },
-        "collection_6": {
-          "type": "collection",
-          "settings": {
-            "collection": "",
-            "label": "Pulseiras",
-            "link": ""
-          }
-        },
-        "collection_7": {
-          "type": "collection",
-          "settings": {
-            "collection": "",
-            "label": "Esmeraldas",
-            "image": "shopify://shop_images/esmera.png",
+            "label": "Gotas",
+            "image": "shopify://shop_images/Gota_Geometrica_em_Ouro_Rose.png",
             "link": ""
           }
         },
@@ -143,8 +127,6 @@
         "collection_3",
         "collection_4",
         "collection_5",
-        "collection_6",
-        "collection_7",
         "collection_8"
       ],
       "settings": {
