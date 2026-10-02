@@ -119,6 +119,14 @@
             "label": "Pronta entrega",
             "link": ""
           }
+        },
+        "collection_MANEX9": {
+          "type": "collection",
+          "settings": {
+            "collection": "",
+            "label": "Crie uma joia única",
+            "link": ""
+          }
         }
       },
       "block_order": [
@@ -127,7 +135,8 @@
         "collection_3",
         "collection_4",
         "collection_5",
-        "collection_8"
+        "collection_8",
+        "collection_MANEX9"
       ],
       "settings": {
         "heading": "Coleções",
