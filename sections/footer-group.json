@@ -67,7 +67,7 @@
         "show_boleto": true,
         "payment_list": "visa,master,american_express,elo,hipercard,diners_club",
         "payment_force_manual": false,
-        "installments_text": "Parcele em até 10x sem juros no cartão",
+        "installments_text": "Parcele em até 4x sem juros no cartão",
         "seal_1": "Compra 100% segura",
         "seal_2": "Site protegido com certificado SSL",
         "legal_text": "<p>Razão social · CNPJ 00.000.000/0001-00 · Endereço completo</p>",
