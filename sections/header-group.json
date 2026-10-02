@@ -72,7 +72,7 @@
           "settings": {
             "collection": "coracao",
             "label": "Coração",
-            "image": "shopify://shop_images/1.png",
+            "image": "shopify://shop_images/coracao_534e63c0-1b68-4f65-bc43-64dd4de8899a.png",
             "link": "shopify://collections/coracao"
           }
         },
@@ -81,7 +81,7 @@
           "settings": {
             "collection": "",
             "label": "Redondo",
-            "image": "shopify://shop_images/2.png",
+            "image": "shopify://shop_images/redondo_e4557014-2d72-4ef1-8b2a-356c56e59bdb.png",
             "link": "shopify://collections/redondo"
           }
         },
@@ -90,7 +90,7 @@
           "settings": {
             "collection": "",
             "label": "Oval",
-            "image": "shopify://shop_images/3.png",
+            "image": "shopify://shop_images/oval_ea39b254-c85d-43f4-9c22-cad67af9150c.png",
             "link": "shopify://collections/oval"
           }
         },
@@ -99,7 +99,7 @@
           "settings": {
             "collection": "",
             "label": "Esmeraldas",
-            "image": "shopify://shop_images/4.png",
+            "image": "shopify://shop_images/esmeralda.png",
             "link": "shopify://collections/esmeraldas"
           }
         },
@@ -108,7 +108,7 @@
           "settings": {
             "collection": "",
             "label": "Gotas",
-            "image": "shopify://shop_images/Gota_Geometrica_em_Ouro_Rose.png",
+            "image": "shopify://shop_images/gota.png",
             "link": ""
           }
         },
