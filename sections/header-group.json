@@ -144,7 +144,7 @@
         "heading": "Coleções",
         "style": "circle",
         "size": "small",
-        "color_scheme": "default",
+        "color_scheme": "surface",
         "home_only": true
       }
     }
