@@ -142,9 +142,9 @@
       ],
       "settings": {
         "heading": "Coleções",
-        "style": "circle",
+        "style": "rounded",
         "size": "small",
-        "color_scheme": "surface",
+        "color_scheme": "default",
         "home_only": true
       }
     }
