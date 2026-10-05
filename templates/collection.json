@@ -13,7 +13,7 @@
       "type": "collection",
       "settings": {
         "show_banner": true,
-        "show_image": true,
+        "show_image": false,
         "show_description": true,
         "enable_filtering": true,
         "products_per_page": 24,
