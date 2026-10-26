@@ -103,6 +103,14 @@
             "link": "shopify://collections/esmeraldas"
           }
         },
+        "collection_B8eeXQ": {
+          "type": "collection",
+          "settings": {
+            "collection": "",
+            "label": "Retangular",
+            "link": "shopify://collections/retangular"
+          }
+        },
         "collection_5": {
           "type": "collection",
           "settings": {
@@ -136,6 +144,7 @@
         "collection_2",
         "collection_3",
         "collection_4",
+        "collection_B8eeXQ",
         "collection_5",
         "collection_8",
         "collection_MANEX9"
